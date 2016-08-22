@@ -4,13 +4,13 @@ const Script = require('smooch-bot').Script;
 
 module.exports = new Script({
     processing: {
-        prompt: (bot) => bot.say('Beep boop...'),
+        //prompt: (bot) => bot.say('Beep boop...'),
         receive: () => 'processing'
     },
 
     start: {
         receive: (bot) => {
-            return bot.say('start').then(() => 'speak');
+            return bot.say('').then(() => 'speak');
         }
     },
 
@@ -18,7 +18,7 @@ module.exports = new Script({
         receive: (bot, message) => {
             let upperText = message.text.trim().toUpperCase();
             return bot.say("Labas, testas praėjo:" + upperText)
-                .then(() => 'speak');
+                .then(() => 'finish');
         }
     },
 
@@ -35,7 +35,7 @@ Is that OK? %[Yes](postback:yes) %[No](postback:no)`))
 
     finish: {
         receive: (bot, message) => {
-            return bot.say('finish').then(() => 'speak');
+            return bot.say('').then(() => 'speak');
             /*return bot.getProp('name')
                 .then((name) => bot.say(`Sorry ${name}, my creator didn't ` +
                         'teach me how to do anything else!'))
