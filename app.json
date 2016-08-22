@@ -1,9 +1,9 @@
 {
-  "name": "Smooch Bot Example App",
-  "description": "Smooch Bot example using Express",
-  "keywords": ["smooch", "bot", "express"],
-  "website": "https://smooch.io",
-  "repository": "https://github.com/smooch/smooch-bot-example",
+  "name": "PaulBot App",
+  "description": "PaulBot App",
+  "keywords": ["paulbot", "bot"],
+  "website": "",
+  "repository": "https://github.com/rimpa/PaulBot",
   "logo": "https://node-js-sample.herokuapp.com/node.png",
   "env": {
     "SMOOCH_APP_TOKEN": {
