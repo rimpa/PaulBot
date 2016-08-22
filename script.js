@@ -10,8 +10,15 @@ module.exports = new Script({
 
     start: {
         receive: (bot) => {
-            return bot.say('Hi! I\'m Smooch Bot!')
-                .then(() => 'askName');
+            return bot.then(() => 'speak');
+        }
+    },
+
+    speak: {
+        receive: (bot, message) => {
+            let upperText = message.text.trim().toUpperCase();
+            return bot.say("Labas, testtas praėjo:" + upperText)
+                .then(() => 'speak');
         }
     },
 
@@ -28,10 +35,11 @@ Is that OK? %[Yes](postback:yes) %[No](postback:no)`))
 
     finish: {
         receive: (bot, message) => {
-            return bot.getProp('name')
+            return bot.then(() => 'speak');
+            /*return bot.getProp('name')
                 .then((name) => bot.say(`Sorry ${name}, my creator didn't ` +
                         'teach me how to do anything else!'))
-                .then(() => 'finish');
+                .then(() => 'finish');*/
         }
     }
 });
