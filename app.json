@@ -2,7 +2,7 @@
   "name": "PaulBot App",
   "description": "PaulBot App",
   "keywords": ["paulbot", "bot"],
-  "website": "",
+  "website": "http://rimavicius.com",
   "repository": "https://github.com/rimpa/PaulBot",
   "logo": "https://node-js-sample.herokuapp.com/node.png",
   "env": {
