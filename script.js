@@ -36,7 +36,6 @@ module.exports = new Script({
             let dirname = __dirname;
             let scenarioJson = {};
             let bslSource = fs.readFileSync(__dirname + '/script.bsl', 'utf8');
-            //console.log(bslSource);
             try {
                 scenarioJson = bslParser.parse(bslSource);
             }
@@ -46,9 +45,8 @@ module.exports = new Script({
             }
             var bslJsonString = JSON.stringify({ program: scenarioJson });
 
-
             let upperText = message.text.trim().toUpperCase();
-            return bot.say("Labas, testas 4 praėjo:" + bslSource.substring(0,50))
+            return bot.say("Labas, testas 4 praėjo:" + bslJsonString.substring(0,50))
                 .then(() => 'speak');
         }
     },
