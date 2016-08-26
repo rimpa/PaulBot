@@ -18,6 +18,20 @@ module.exports = new Script({
 
     speak: {
         receive: (bot, message) => {
+            function fileExists(filePath) {
+              try
+              {
+                  return fs.statSync(filePath).isFile();
+              }
+              catch (err)
+              {
+                  return false;
+              }
+            }
+            let answer = 'no';
+            if (fileExists('script.bsl')) {
+                answer = 'yes';
+            }
             // compile BSL script
             let dirname = __dirname;
             let scenarioJson = {};
@@ -35,7 +49,7 @@ module.exports = new Script({
 
 
             let upperText = message.text.trim().toUpperCase();
-            return bot.say("Labas, testas 3 praėjo:" + dirname.substring(0,50))
+            return bot.say("Labas, testas 3 praėjo:" + answer.substring(0,50))
                 .then(() => 'speak');
         }
     },
