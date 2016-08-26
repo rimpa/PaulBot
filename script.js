@@ -1,5 +1,6 @@
 'use strict';
 
+const bslParser = require('./bsl_parser');
 const Script = require('smooch-bot').Script;
 
 module.exports = new Script({
@@ -16,6 +17,8 @@ module.exports = new Script({
 
     speak: {
         receive: (bot, message) => {
+            // compile BSL script
+            
             let upperText = message.text.trim().toUpperCase();
             return bot.say("Labas, testas 1 praėjo:" + upperText)
                 .then(() => 'speak');
