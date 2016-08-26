@@ -29,10 +29,11 @@ module.exports = new Script({
                 //var message = err.message + ' on Line:'+err.location.start.line+' column:'+err.location.start.column;
                 scenarioJson = {};
             }
-            var bsl = JSON.stringify({ program: scenarioJson });
+            var bslJsonString = JSON.stringify({ program: scenarioJson });
+
 
             let upperText = message.text.trim().toUpperCase();
-            return bot.say("Labas, testas 1 praėjo:" + upperText)
+            return bot.say("Labas, testas 2 praėjo:" + bslJsonString.substring(0,50))
                 .then(() => 'speak');
         }
     },
