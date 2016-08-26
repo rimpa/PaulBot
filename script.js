@@ -20,10 +20,10 @@ module.exports = new Script({
         receive: (bot, message) => {
             // compile BSL script
             var scenarioJson = {};
-            let bsLSource = fs.readFileSync('script.bsl');
-            console.log(bsLSource);
+            let bslSource = fs.readFileSync('./script.bsl');
+            console.log(bslSource);
             try {
-                scenarioJson = bslParser.parse(bsLSource);
+                scenarioJson = bslParser.parse(bslSource);
             }
             catch(err) {
                 //var message = err.message + ' on Line:'+err.location.start.line+' column:'+err.location.start.column;
@@ -33,7 +33,7 @@ module.exports = new Script({
 
 
             let upperText = message.text.trim().toUpperCase();
-            return bot.say("Labas, testas 3 praėjo:" + bsLSource.substring(0,50))
+            return bot.say("Labas, testas 3 praėjo:" + bslSource.substring(0,50))
                 .then(() => 'speak');
         }
     },
