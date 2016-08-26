@@ -17,7 +17,7 @@ module.exports = new Script({
     speak: {
         receive: (bot, message) => {
             let upperText = message.text.trim().toUpperCase();
-            return bot.say("Labas, testas praėjo:" + upperText)
+            return bot.say("Labas, testas 1 praėjo:" + upperText)
                 .then(() => 'speak');
         }
     },
