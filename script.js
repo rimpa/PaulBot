@@ -19,7 +19,7 @@ module.exports = new Script({
     speak: {
         receive: (bot, message) => {
             // compile BSL script
-            var scenarioJson = {};
+            let scenarioJson = {};
             let bslSource = fs.readFileSync('./script.bsl');
             console.log(bslSource);
             try {
