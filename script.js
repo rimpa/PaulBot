@@ -19,9 +19,11 @@ module.exports = new Script({
     speak: {
         receive: (bot, message) => {
             // compile BSL script
+            let dirname = __dirname;
             let scenarioJson = {};
-            let bslSource = fs.readFileSync('./script.bsl');
-            console.log(bslSource);
+            //let bslSource = fs.readFileSync('./script.bsl', 'utf8');
+            //console.log(bslSource);
+            let bslSource = '';
             try {
                 scenarioJson = bslParser.parse(bslSource);
             }
@@ -33,7 +35,7 @@ module.exports = new Script({
 
 
             let upperText = message.text.trim().toUpperCase();
-            return bot.say("Labas, testas 3 praėjo:" + bslSource.substring(0,50))
+            return bot.say("Labas, testas 3 praėjo:" + dirname.substring(0,50))
                 .then(() => 'speak');
         }
     },
