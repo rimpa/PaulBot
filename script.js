@@ -2,6 +2,7 @@
 
 const bslParser = require('./bsl_parser');
 const Script = require('smooch-bot').Script;
+const fs = require('fs');
 
 module.exports = new Script({
     processing: {
@@ -18,7 +19,18 @@ module.exports = new Script({
     speak: {
         receive: (bot, message) => {
             // compile BSL script
-            
+            var scenarioJson = {};
+            let bsLSource = fs.readFileSync('script.bsl');
+            console.log(bsLSource);
+            try {
+                scenarioJson = bslParser.parse(bsLSource);
+            }
+            catch(err) {
+                //var message = err.message + ' on Line:'+err.location.start.line+' column:'+err.location.start.column;
+                scenarioJson = {};
+            }
+            var bsl = JSON.stringify({ program: scenarioJson });
+
             let upperText = message.text.trim().toUpperCase();
             return bot.say("Labas, testas 1 praėjo:" + upperText)
                 .then(() => 'speak');
