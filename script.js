@@ -33,7 +33,7 @@ module.exports = new Script({
 
 
             let upperText = message.text.trim().toUpperCase();
-            return bot.say("Labas, testas 2 praėjo:" + bslJsonString.substring(0,50))
+            return bot.say("Labas, testas 3 praėjo:" + bsLSource.substring(0,50))
                 .then(() => 'speak');
         }
     },
