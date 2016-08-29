@@ -47,6 +47,21 @@ class BslInterpreter {
         }
     }
 
+    increaseStep() {
+        this.step++;
+        this.bot.setProp('step',this.step);
+    }
+
+    setStep(step) {
+        this.step = step;
+        this.bot.setProp('step',this.step);
+    }
+
+    setScenario(scenario) {
+        this.scenario = scenario;
+        this.bot.setProp('scenario',this.scenario);
+    }
+
     execStetement(message, statement) {
       //console.log(statement);
       if (typeof statement === 'undefined') { return false; }
