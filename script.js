@@ -1,6 +1,8 @@
 'use strict';
 
-const bslParser = require('./bsl_parser');
+const BslParser = require('./bslParser');
+const BslInterpreter = require('./bslInterpreter');
+
 const Script = require('smooch-bot').Script;
 const fs = require('fs');
 
@@ -18,32 +20,21 @@ module.exports = new Script({
 
     speak: {
         receive: (bot, message) => {
-            function fileExists(filePath) {
-              try
-              {
-                  return fs.statSync(filePath).isFile();
-              }
-              catch (err)
-              {
-                  return false;
-              }
-            }
-            let answer = 'no';
-            if (fileExists('script.bsl')) {
-                answer = 'yes';
-            }
-            // compile BSL script
+            // compile bsl script
             let dirname = __dirname;
             let scenarioJson = {};
             let bslSource = fs.readFileSync(__dirname + '/script.bsl', 'utf8');
             try {
-                scenarioJson = bslParser.parse(bslSource);
+                scenarioJson = BslParser.parse(bslSource);
             }
             catch(err) {
                 //var message = err.message + ' on Line:'+err.location.start.line+' column:'+err.location.start.column;
                 scenarioJson = {};
             }
             var bslJsonString = JSON.stringify({ program: scenarioJson });
+            // end compile bsl script
+
+            BslInterpreter.say("pra4jo 1");
 
             let upperText = message.text.trim().toUpperCase();
             return bot.say("Labas, testas 4 praėjo:" + bslJsonString.substring(0,50))
