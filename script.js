@@ -33,10 +33,10 @@ module.exports = new Script({
             }
             var bslJsonString = JSON.stringify({ program: scenarioJson });
             // TODO: save to file ?
-            var programJson = { program: scenarioJson };
+            //var programJson = { program: scenarioJson };
             // end compile bsl script
 
-            var bslInterpreter = new BslInterpreter({'bot':bot, 'programJson': programJson});
+            var bslInterpreter = new BslInterpreter({'bot':bot, 'programJson': scenarioJson});
 
             bslInterpreter.interpret(message.text.trim());
             bslInterpreter.say("pra4jo 1");
