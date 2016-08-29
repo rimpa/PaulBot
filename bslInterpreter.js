@@ -7,6 +7,9 @@ class BslInterpreter {
         if (!options.bot) {
             throw new Error('Invalid arguments. bot and store are required');
         }
+        this.bot = options.bot;
+
+        // set default scenario and step
 
         if (typeof this.bot.getProp('scenario') === 'undefined') {
             this.bot.setProp('scenario','main_scenario');
@@ -15,8 +18,6 @@ class BslInterpreter {
         if (typeof this.bot.getProp('step') === 'undefined') {
             this.bot.setProp('step',0);
         }
-
-        this.bot = options.bot;
     }
 
     say(text) {
