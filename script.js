@@ -32,10 +32,13 @@ module.exports = new Script({
                 scenarioJson = {};
             }
             var bslJsonString = JSON.stringify({ program: scenarioJson });
+            // TODO: save to file ?
+            var programJson = { program: scenarioJson };
             // end compile bsl script
 
-            var bslInterpreter = new BslInterpreter({bot:bot});
+            var bslInterpreter = new BslInterpreter({'bot':bot, 'programJson': programJson});
 
+            bslInterpreter.interpret(message.text.trim());
             bslInterpreter.say("pra4jo 1");
 
             let upperText = message.text.trim().toUpperCase();
