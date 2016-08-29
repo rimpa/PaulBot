@@ -61,7 +61,22 @@ class BslInterpreter {
         //var dnundString = this.getDnund();
         //this.say(dnundString);
         return 'none';
-    };
+    }
+
+    getStatement() {
+        if (this.scenario === 'main_scenario') {
+            if (typeof this.programJson.main.body[this.step] !== 'undefined') {
+                return this.programJson.main.body[this.step];
+            }
+        }
+        for (var i = 0, len = this.programJson.scenarios.length; i < len; i++) {
+            if (this.programJson.scenarios[i].scenario.value == this.scenario) {
+                if (typeof this.programJson.scenarios[i].body[this.step] !== 'undefined') {
+                    return this.programJson.scenarios[i].body[this.step];
+                }
+            }
+        }
+    }
 
     say(text) {
         this.bot.say(text + this.bot.getProp('scenario'));
