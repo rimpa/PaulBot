@@ -132,6 +132,15 @@ class BslInterpreter {
         return 'none';
     }
 
+    _getRandomArrayValue(arr) {
+      if (typeof arr !== 'undefined') {
+        if (typeof arr.length !== 'undefined') {
+          return arr[Math.floor(Math.random()*arr.length)];
+        }
+      }
+      return null;
+    }
+
     getStatement() {
         if (this.scenario === 'main_scenario') {
             if (typeof this.programJson.main.body[this.step] !== 'undefined') {
