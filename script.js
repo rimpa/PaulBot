@@ -1,7 +1,7 @@
 'use strict';
 
 const BslParser = require('./bslParser');
-const BslInterpreter = require('./bslInterpreter').BslInterpreter;
+const BslInterpreter = require('./bslInterpreter');
 
 const Script = require('smooch-bot').Script;
 const fs = require('fs');
@@ -34,7 +34,9 @@ module.exports = new Script({
             var bslJsonString = JSON.stringify({ program: scenarioJson });
             // end compile bsl script
 
-            BslInterpreter.say("pra4jo 1");
+            var bslInterpreter = new BslInterpreter({bot:bot});
+
+            bslInterpreter.say("pra4jo 1");
 
             let upperText = message.text.trim().toUpperCase();
             return bot.say("Labas, testas 4 praėjo:" + bslJsonString.substring(0,50))
