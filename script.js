@@ -1,7 +1,7 @@
 'use strict';
 
 const BslParser = require('./bslParser');
-const BslInterpreter = require('./bslInterpreter');
+const BslInterpreter = require('./bslInterpreter').BslInterpreter;
 
 const Script = require('smooch-bot').Script;
 const fs = require('fs');
