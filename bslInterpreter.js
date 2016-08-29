@@ -64,6 +64,7 @@ class BslInterpreter {
     }
 
     getStatement() {
+        console.log(this.programJson);
         if (this.scenario === 'main_scenario') {
             if (typeof this.programJson.main.body[this.step] !== 'undefined') {
                 return this.programJson.main.body[this.step];
