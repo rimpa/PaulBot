@@ -42,8 +42,9 @@ module.exports = new Script({
             bslInterpreter.say("pra4jo 1");
 
             let upperText = message.text.trim().toUpperCase();
-            return bot.say("Labas, testas 4 praėjo:" + bslJsonString.substring(0,50))
-                .then(() => 'speak');
+            return () => 'speak';
+            /*return bot.say("Labas, testas 4 praėjo:" + bslJsonString.substring(0,50))
+                .then(() => 'speak');*/
         }
     },
 
