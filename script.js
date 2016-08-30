@@ -39,10 +39,10 @@ module.exports = new Script({
             var bslInterpreter = new BslInterpreter({'bot':bot, 'programJson': scenarioJson});
 
             bslInterpreter.interpret(message.text.trim());
-            bslInterpreter.say("pra4jo 1");
+            //bslInterpreter.say("pra4jo 1");
 
             let upperText = message.text.trim().toUpperCase();
-            return () => 'speak';
+            return bot.getProp('name').then(() => 'start');
             /*return bot.say("Labas, testas 4 praėjo:" + bslJsonString.substring(0,50))
                 .then(() => 'speak');*/
         }
