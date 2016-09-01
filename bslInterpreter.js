@@ -191,14 +191,16 @@ class BslInterpreter {
       var vals = [];
       for (var i = 0, len = this.programJson.declaration.length; i < len; i++) {
         var statement = this.programJson.declaration[i];
+        console.log(statement);
         if (statement.statement == 'DNUND') {
           vals.push(statement.body.value);
         }
       }
+      console.log(vals);
       if (!vals.length) {
         return '';
       }
-      return _getRandomArrayValue(vals);
+      return this._getRandomArrayValue(vals);
     }
 
     say(text) {
