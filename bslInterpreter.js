@@ -15,11 +15,13 @@ class BslInterpreter {
 
 `       // set default scenario and step`
         this.bot.getProp('scenario').then((scenario) => {
+          console.log(scenario);
           if (typeof scenario === 'undefined') {
             this.bot.setProp('scenario',this.scenario);
           }
         });
         this.bot.getProp('step').then((step) => {
+          console.log(step);
           if (typeof step === 'undefined') {
             this.bot.setProp('step',this.step);
           }
