@@ -12,6 +12,7 @@ class BslInterpreter {
 
 `       // set default scenario and step`
         this.bot.getProp('scenario').then((scenario) => {
+          console.log(scenario);
           if (typeof scenario === 'undefined') {
             this.scenario = 'main_scenario';
             this.bot.setProp('scenario','main_scenario');
@@ -20,6 +21,7 @@ class BslInterpreter {
           }
         });
         this.bot.getProp('step').then((step) => {
+          console.log(step);
           if (typeof step === 'undefined') {
             this.step = 0;
             this.bot.setProp('step',0);
@@ -30,10 +32,10 @@ class BslInterpreter {
     }
 
     interpret(message) {
-        setTimeout(function(){
+        /*setTimeout(function(){
           console.log('scenario:'+this.scenario);
           console.log(this.step);
-        }, 3000);
+        }, 3000);*/
         if (this.scenario == 'none') {
             this.scenario = this.getScenario(message);
             this.bot.setProp('scenario',this.scenario);
