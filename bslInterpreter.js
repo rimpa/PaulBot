@@ -203,7 +203,10 @@ class BslInterpreter {
         return;
       }
       this.say(this.sayArray.shift());
-      return this.sayArrayDelayed();
+      setTimeout(() => {
+          this.sayArrayDelayed();
+      }, 1000);
+      //return this.sayArrayDelayed();
     }
 
     say(text) {
