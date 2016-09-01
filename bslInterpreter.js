@@ -203,7 +203,7 @@ class BslInterpreter {
         return;
       }
       this.say(this.sayArray.shift());
-      setTimeout(function() {
+      setTimeout(function(this) {
         this.sayArrayDelayed();
       }, 1000);
     }
