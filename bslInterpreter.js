@@ -203,9 +203,12 @@ class BslInterpreter {
         return;
       }
       this.say(this.sayArray.shift());
-      setTimeout(function(this) {
-        this.sayArrayDelayed();
-      }, 1000);
+
+      // Sleep
+      yield function(callback) {
+        setTimeout(callback, 1000);
+      }
+      return this.sayArrayDelayed();
     }
 
     say(text) {
