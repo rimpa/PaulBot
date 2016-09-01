@@ -155,8 +155,8 @@ class BslInterpreter {
             }
           }
         }
-        //var dnundString = this.getDnund();
-        //this.say(dnundString);
+        var dnundString = this.getDnund();
+        this.say(dnundString);
         return 'none';
     }
 
@@ -183,6 +183,20 @@ class BslInterpreter {
             }
         }
     }
+
+    getDnund() {
+      var vals = [];
+      for (var i = 0, len = this.programJson.declaration.length; i < len; i++) {
+        var statement = this.programJson.declaration[i];
+        if (statement.statement == 'DNUND') {
+          vals.push(statement.body.value);
+        }
+      }
+      if (!vals.length) {
+        return '';
+      }
+      return _getRandomArrayValue(vals);
+    };
 
     say(text) {
         this.bot.say(text);
