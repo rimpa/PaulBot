@@ -9,6 +9,7 @@ class BslInterpreter {
         }
         this.bot = options.bot;
         this.programJson = options.programJson;
+        this.sayArray = [];
     }
 
     startInterpret(message) {
@@ -34,10 +35,6 @@ class BslInterpreter {
     }
 
     interpret(message) {
-
-        console.log('scenario:'+this.scenario);
-        console.log(this.step);
-
         if (this.scenario == 'none') {
             this.scenario = this.getScenario(message);
             this.bot.setProp('scenario',this.scenario);
@@ -58,6 +55,7 @@ class BslInterpreter {
                 this.increaseStep();
             }
         }
+        this.sayArrayDelayed();
     }
 
     increaseStep() {
@@ -84,7 +82,7 @@ class BslInterpreter {
         case "SAY":
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
-                this.say(randMess.value);
+                this.sayLater(randMess.value);
             }
             return true;
             break;
@@ -145,8 +143,6 @@ class BslInterpreter {
     }
 
     getScenario(message) {
-        console.log(message.toLowerCase());
-        console.log(this.programJson.scenarios);
         for (var i = 0, len = this.programJson.scenarios.length; i < len; i++) {
           var scenario = this.programJson.scenarios[i];
           for (var j = 0, len2 = scenario.invoke.length; j < len2; j++) {
@@ -156,7 +152,6 @@ class BslInterpreter {
           }
         }
         var dnundString = this.getDnund();
-        console.log('dnundString:'+dnundString);
         this.say(dnundString);
         return 'none';
     }
@@ -186,27 +181,36 @@ class BslInterpreter {
     }
 
     getDnund() {
-      console.log('getDnund()');
-      console.log(this.programJson.declaration);
       var vals = [];
       for (var i = 0, len = this.programJson.declaration.length; i < len; i++) {
         var statement = this.programJson.declaration[i];
-        console.log(statement);
         if (statement.statement == 'DNUND') {
           vals.push(statement.body.value);
         }
       }
-      console.log(vals);
       if (!vals.length) {
         return '';
       }
       return this._getRandomArrayValue(vals);
     }
 
-    say(text) {
-        this.bot.say(text);
+    sayLater(text) {
+      this.sayArray.push(text);
     }
 
+    sayArrayDelayed() {
+      if (!this.sayArray.length) {
+        return;
+      }
+      this.say(this.sayArray.shift());
+      setTimeout(function() {
+        this.sayArrayDelayed();
+      }, 1000);
+    }
+
+    say(text) {
+      this.bot.say(text);
+    }
 }
 
 module.exports = BslInterpreter;
