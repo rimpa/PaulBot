@@ -156,6 +156,7 @@ class BslInterpreter {
           }
         }
         var dnundString = this.getDnund();
+        console.log('dnundString:'+dnundString);
         this.say(dnundString);
         return 'none';
     }
@@ -185,6 +186,8 @@ class BslInterpreter {
     }
 
     getDnund() {
+      console.log('getDnund()');
+      console.log(this.programJson.declaration);
       var vals = [];
       for (var i = 0, len = this.programJson.declaration.length; i < len; i++) {
         var statement = this.programJson.declaration[i];
@@ -196,7 +199,7 @@ class BslInterpreter {
         return '';
       }
       return _getRandomArrayValue(vals);
-    };
+    }
 
     say(text) {
         this.bot.say(text);
