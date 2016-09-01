@@ -38,7 +38,7 @@ module.exports = new Script({
 
             var bslInterpreter = new BslInterpreter({'bot':bot, 'programJson': scenarioJson});
 
-            bslInterpreter.interpret(message.text.trim());
+            bslInterpreter.startInterpret(message.text.trim());
             //bslInterpreter.say("pra4jo 1");
             //let upperText = message.text.trim().toUpperCase();
             return bot.getProp('name').then(() => 'speak');

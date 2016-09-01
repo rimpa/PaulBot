@@ -9,33 +9,35 @@ class BslInterpreter {
         }
         this.bot = options.bot;
         this.programJson = options.programJson;
+    }
 
-`       // set default scenario and step`
-        this.bot.getProp('scenario').then((scenario) => {
-          console.log(scenario);
-          if (typeof scenario === 'undefined') {
-            this.scenario = 'main_scenario';
-            this.bot.setProp('scenario','main_scenario');
-          } else {
-            this.scenario = scenario;
-          }
-        });
+    startInterpret(message) {
+      this.bot.getProp('scenario').then((scenario) => {
+        if (typeof scenario === 'undefined') {
+          this.scenario = 'main_scenario';
+          this.bot.setProp('scenario','main_scenario');
+        } else {
+          this.scenario = scenario;
+        }
+      }).then(() => {
         this.bot.getProp('step').then((step) => {
-          console.log(step);
           if (typeof step === 'undefined') {
             this.step = 0;
             this.bot.setProp('step',0);
           } else {
             this.step = step;
           }
+        }).then(() => {
+          this.interpret(message);
         });
+      });
     }
 
     interpret(message) {
-        /*setTimeout(function(){
-          console.log('scenario:'+this.scenario);
-          console.log(this.step);
-        }, 3000);*/
+
+        console.log('scenario:'+this.scenario);
+        console.log(this.step);
+
         if (this.scenario == 'none') {
             this.scenario = this.getScenario(message);
             this.bot.setProp('scenario',this.scenario);
