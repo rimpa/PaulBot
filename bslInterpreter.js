@@ -172,7 +172,7 @@ class BslInterpreter {
     }
 
     say(text) {
-        this.bot.say(text + this.bot.getProp('scenario'));
+        this.bot.say(text);
     }
 
 }
