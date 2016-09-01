@@ -40,13 +40,10 @@ module.exports = new Script({
 
             bslInterpreter.interpret(message.text.trim());
             //bslInterpreter.say("pra4jo 1");
-
-            
-
-            let upperText = message.text.trim().toUpperCase();
-            //return bot.getProp('name').then(() => 'start');
-            return bot.say("Labas, testas 4 praėjo:" + bslJsonString.substring(0,50))
-                .then(() => 'speak');
+            //let upperText = message.text.trim().toUpperCase();
+            return bot.getProp('name').then(() => 'speak');
+            /*return bot.say("Labas, testas 4 praėjo:" + bslJsonString.substring(0,50))
+                .then(() => 'speak');*/
         }
     },
 
