@@ -30,6 +30,8 @@ class BslInterpreter {
     }
 
     interpret(message) {
+        console.log('scenario:'+this.scenario);
+        console.log(this.step);
         if (this.scenario == 'none') {
             this.scenario = this.getScenario(message);
             this.bot.setProp('scenario',this.scenario);
