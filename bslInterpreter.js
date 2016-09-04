@@ -80,14 +80,19 @@ class BslInterpreter {
 
       switch (statement.statement) {
         case "SAY":
-            var randMess = this._getRandomArrayValue(statement.body);
+            let randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
                 this.sayLater(randMess.value);
             }
             return true;
             break;
-        /*case "ASK":
-            if (typeof sess.asked !== 'undefined' && sess.asked) {
+        case "ASK":
+            let randMess = this._getRandomArrayValue(statement.body.ask);
+            if (typeof randMess.value !== 'undefined') {
+                this.sayLater(randMess.value);
+            }
+            return false;
+            /*if (typeof sess.asked !== 'undefined' && sess.asked) {
               // collect && validate
               if (msg) {
                 var collectedValue = validator.trim(msg);
@@ -131,9 +136,9 @@ class BslInterpreter {
               }
             }
             sess.asked = true;
-            return false;
+            return false;*/
             break;
-        case "PLUGIN":
+        /*case "PLUGIN":
             console.log("Plugin");
             return true;
             break;*/

@@ -20,3 +20,10 @@ SCENARIO  CREATOR "creator" "learn more"
 SAY       "My creator Paulius Rimavičius is an entrepreneur and a developer with 13 years professional experience!"
 SAY       "test 1"
 END
+
+SCENARIO  NAME "name"
+ASK       "What\'s your name?"
+SAVE      name
+SAY       "Great! I'll call you ${name}"
+SAY       "Is that OK? %[Yes](postback:yes) %[No](postback:no)"
+END
