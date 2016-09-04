@@ -88,7 +88,10 @@ class BslInterpreter {
             break;
         case "ASK":
             this.bot.getProp('asked').then((asked) => {
-                if (typeof asked !== 'undefined' && asked) {
+                console.log(
+                  asked
+                );
+                if (typeof asked !== 'undefined' && asked === true) {
 
                 } else {
                   var randMess = this._getRandomArrayValue(statement.body.ask);
