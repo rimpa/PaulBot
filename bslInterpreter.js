@@ -87,10 +87,16 @@ class BslInterpreter {
             return true;
             break;
         case "ASK":
-            var randMess = this._getRandomArrayValue(statement.body.ask);
-            if (typeof randMess.value !== 'undefined') {
-                this.sayLater(randMess.value);
-            }
+            this.bot.getProp('asked').then((asked) => {
+                if (typeof asked !== 'undefined' && asked) {
+
+                } else {
+                  var randMess = this._getRandomArrayValue(statement.body.ask);
+                  if (typeof randMess.value !== 'undefined') {
+                      this.sayLater(randMess.value);
+                  }
+                }
+            });
             return false;
             /*if (typeof sess.asked !== 'undefined' && sess.asked) {
               // collect && validate
