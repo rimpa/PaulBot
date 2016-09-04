@@ -31,18 +31,15 @@ module.exports = new Script({
                 scenarioJson = {};
             }
             var bslJsonString = JSON.stringify({ program: scenarioJson });
-            // TODO: save to file ?
+            // TODO: cache to file ?
             //var programJson = { program: scenarioJson };
             // end compile bsl script
 
             var bslInterpreter = new BslInterpreter({'bot':bot, 'programJson': scenarioJson});
 
             bslInterpreter.startInterpret(message.text.trim());
-            //bslInterpreter.say("pra4jo 1");
-            //let upperText = message.text.trim().toUpperCase();
-            return bot.getProp('name').then(() => 'speak');
-            /*return bot.say("Labas, testas 4 praėjo:" + bslJsonString.substring(0,50))
-                .then(() => 'speak');*/
+            //return bot.getProp('name').then(() => 'speak');
+            return () => 'speak';
         }
     },
 
