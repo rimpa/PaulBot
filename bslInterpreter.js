@@ -206,7 +206,6 @@ class BslInterpreter {
       setTimeout(() => {
           this.sayArrayDelayed();
       }, 1000);
-      //return this.sayArrayDelayed();
     }
 
     say(text) {
