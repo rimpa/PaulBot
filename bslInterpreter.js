@@ -88,17 +88,15 @@ class BslInterpreter {
             break;
         case "ASK":
             this.bot.getProp('asked').then((asked) => {
-                console.log(
-                  asked
-                );
-                if (typeof asked !== 'undefined' && asked === true) {
-
+                if (typeof asked !== 'undefined' && asked === 'true') {
+                  console.log(message);
+                  this.say('gavau'+message);
                 } else {
                   var randMess = this._getRandomArrayValue(statement.body.ask);
-                  console.log(randMess);
                   if (typeof randMess.value !== 'undefined') {
                       this.say(randMess.value);
                   }
+                  this.bot.setProp('asked', 'true');
                 }
             });
             return false;
