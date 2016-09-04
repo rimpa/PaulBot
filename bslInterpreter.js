@@ -97,7 +97,7 @@ class BslInterpreter {
                   var randMess = this._getRandomArrayValue(statement.body.ask);
                   console.log(randMess);
                   if (typeof randMess.value !== 'undefined') {
-                      this.sayLater(randMess.value);
+                      this.say(randMess.value);
                   }
                 }
             });
