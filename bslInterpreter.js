@@ -80,14 +80,14 @@ class BslInterpreter {
 
       switch (statement.statement) {
         case "SAY":
-            let randMess = this._getRandomArrayValue(statement.body);
+            var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
                 this.sayLater(randMess.value);
             }
             return true;
             break;
         case "ASK":
-            let randMess = this._getRandomArrayValue(statement.body.ask);
+            var randMess = this._getRandomArrayValue(statement.body.ask);
             if (typeof randMess.value !== 'undefined') {
                 this.sayLater(randMess.value);
             }
