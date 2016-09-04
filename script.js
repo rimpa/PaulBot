@@ -39,7 +39,7 @@ module.exports = new Script({
 
             bslInterpreter.startInterpret(message.text.trim());
             //return bot.getProp('name').then(() => 'speak');
-            return () => 'speak';
+            return 'speak';
         }
     },
 
