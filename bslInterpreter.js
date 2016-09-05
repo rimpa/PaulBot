@@ -91,6 +91,39 @@ class BslInterpreter {
                 if (typeof asked !== 'undefined' && asked === 'true') {
                   console.log(message);
                   this.say('gavau'+message);
+                  // collect && validate
+                  if (message) {
+                    var collectedValue = validator.trim(message);
+                    var collectedVariable = statement.body.collect.body.value.value;
+                    /*if (typeof statement.body.validate !== 'undefined') {
+                      for (var i = 0, len = statement.body.validate.length; i < len; i++) {
+                        var validate = statement.body.validate[i].body.value;
+                        var funcName = validate.function.value;
+                        var validateFunction = null;
+                        try {
+                          var validateFunction = validator[funcName];// require('./validate/'+ funcName +'.js');
+                        } catch (ex) {
+                          this.say('Validation function "'+funcName+'" not found.');
+                        }
+                        if (validateFunction) {
+                          if (!validateFunction.validate(getParams(validate.params))) {
+                            var randError = this._getRandomArrayValue(validate.error);
+                            var errText = this._getRandomArrayValue(randError.body).value;
+                            this.say(errText);
+                            return false;
+                          }
+                        }
+                        var randError = this._getRandomArrayValue(validate.error);
+                        var errText = this._getRandomArrayValue(randError.body)
+                      }
+                      this.bot.setProp('asked', 'false');
+                      return true;
+                    }
+                    */
+                    this.bot.setProp(collectedVariable, collectedValue);
+                    this.bot.setProp('asked', 'false');
+                    return true;
+                  }
                 } else {
                   var randMess = this._getRandomArrayValue(statement.body.ask);
                   if (typeof randMess.value !== 'undefined') {
