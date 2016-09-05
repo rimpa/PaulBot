@@ -1,5 +1,7 @@
 'use strict';
 
+const async = require("async");
+
 class BslInterpreter {
     constructor(options) {
         options = options || {};
