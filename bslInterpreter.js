@@ -35,6 +35,7 @@ class BslInterpreter {
 
     startInterpret(message) {
       var scenario = this.getProp('scenario').next();
+      
       console.log('scenario2:'+scenario);
       //console.log('scenario:'+scenario.value);
       //console.log('scenario:'+scenario.next().value);
