@@ -29,7 +29,9 @@ class BslInterpreter {
             this.step = step;
           }
         }).then(() => {
-          this.interpret(message);
+          this.interpret(message).then((ret) => {
+            console.log('ret:'+ret);
+          });
         });
       });
     }
@@ -41,6 +43,19 @@ class BslInterpreter {
             this.step = 0;
             this.bot.setProp('step',this.step);
         }
+        var statementJson = this.getStatement();
+        if (typeof statementJson === 'undefined') {
+            this.setScenario('none');
+            this.setStep(0);
+            return false;
+        }
+        var next = this.execStetement(message, statementJson);
+        if (next) {
+          this.increaseStep();
+          return true;
+        }
+        return false;
+        /*
         var next = true;
         while (next) {
             var statementJson = this.getStatement();
@@ -55,7 +70,7 @@ class BslInterpreter {
                 this.increaseStep();
             }
         }
-        this.sayArrayDelayed();
+        this.sayArrayDelayed();*/
     }
 
     increaseStep() {
