@@ -1,7 +1,5 @@
 'use strict';
 
-const async = require("async");
-
 class BslInterpreter {
     constructor(options) {
         options = options || {};
@@ -15,8 +13,7 @@ class BslInterpreter {
     }
 
     startInterpret(message) {
-      var count = 0;
-
+      /*var count = 0;
       async.whilst(
           function () {
             console.log('count:'+count);
@@ -30,7 +27,7 @@ class BslInterpreter {
           }
       );
       console.log('test');
-      return;
+      return;*/
       this.bot.getProp('scenario').then((scenario) => {
         if (typeof scenario === 'undefined') {
           this.scenario = 'main_scenario';
@@ -47,8 +44,8 @@ class BslInterpreter {
             this.step = step;
           }
         }).then(() => {
-          var ret = this.interpret(message);
-          console.log('ret:'+ret);
+          this.interpret(message);
+          //console.log('ret:'+ret);
           /*.then((ret) => {
             console.log('ret:'+ret);
           });*/
@@ -63,6 +60,7 @@ class BslInterpreter {
             this.step = 0;
             this.bot.setProp('step',this.step);
         }
+        /*
         var statementJson = this.getStatement();
         if (typeof statementJson === 'undefined') {
             this.setScenario('none');
@@ -75,7 +73,7 @@ class BslInterpreter {
           return true;
         }
         return false;
-        /*
+        */
         var next = true;
         while (next) {
             var statementJson = this.getStatement();
@@ -90,7 +88,7 @@ class BslInterpreter {
                 this.increaseStep();
             }
         }
-        this.sayArrayDelayed();*/
+        this.sayArrayDelayed();
     }
 
     increaseStep() {
