@@ -12,12 +12,20 @@ class BslInterpreter {
         this.sayArray = [];
     }
 
-    *getProp(prop) {
-      var prom = yield this.bot.getProp(prop);
-      prom.then(function(val) {
+    *getPropGen(prop) {
+      var promise1 = yield this.bot.getProp(prop);
+    }
+
+    getProp(prop) {
+      var gen = this.getPropGen(prop).next();
+      console.log('done:'+ gen.done);
+
+      return "cia bus reiksme";
+      /*prom.then(function(val) {
           console.log('scenario1:'+val);
           return val;
-      });
+      });*/
+
       /*var value = yield this.bot.getProp(prop).then((prop1) => {
         console.log('scenario1:'+prop1);
         //this.getProp().next( prop1 );
@@ -30,7 +38,7 @@ class BslInterpreter {
             console.log('pries yield');
             return yield 10;
           });*/
-          
+
           /*(prop1) => {
           console.log('pries return');
           return yield prop1;
@@ -39,7 +47,7 @@ class BslInterpreter {
     }
 
     startInterpret(message) {
-      var scenario = this.getProp('scenario').next();
+      var scenario = this.getProp('scenario');
       //console.log('scenario2:'+scenario);
       console.log(scenario);
       //console.log('scenario:'+scenario.next().value);
