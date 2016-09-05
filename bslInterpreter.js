@@ -38,8 +38,8 @@ class BslInterpreter {
       var scenario = this.getProp('scenario').next();
       //console.log('scenario2:'+scenario);
 
-      console.log('scenario:'+scenario.value);
-      console.log('scenario:'+scenario.next().value);
+      console.log(scenario.value);
+      //console.log('scenario:'+scenario.next().value);
       return;
       this.bot.getProp('scenario').then((scenario) => {
         if (typeof scenario === 'undefined') {
