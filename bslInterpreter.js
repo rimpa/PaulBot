@@ -27,7 +27,7 @@ class BslInterpreter {
 
     startInterpret(message) {
       var scenario = this.getProp('scenario');
-      console.log('scenario:'+scenario.value);
+      console.log('scenario:'+scenario.next().value);
       return;
       this.bot.getProp('scenario').then((scenario) => {
         if (typeof scenario === 'undefined') {
