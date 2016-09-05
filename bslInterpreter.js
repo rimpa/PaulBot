@@ -14,9 +14,9 @@ class BslInterpreter {
 
     *getProp(prop) {
         this.bot.getProp(prop).then(
-          function(val) {
+          function*(val) {
             'use strict';
-            yield 10;
+            return yield 10;
           }
           /*(prop1) => {
           console.log('pries return');
