@@ -12,7 +12,21 @@ class BslInterpreter {
         this.sayArray = [];
     }
 
+    getProp(prop) {
+      return new Promise((resolve, reject) => {
+          this.bot.getProp(prop).then((prop1) => {
+            console.log('pries resolve');
+            resolve(prop1);
+          });
+          // Do nothing
+          //resolve();
+      });
+    }
+
     startInterpret(message) {
+      var scenario = this.getProp('scenario');
+      console.log('scenario:'+scenario);
+      return;
       this.bot.getProp('scenario').then((scenario) => {
         if (typeof scenario === 'undefined') {
           this.scenario = 'main_scenario';
