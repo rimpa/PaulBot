@@ -30,7 +30,7 @@ class BslInterpreter {
             console.log('pries yield');
             return yield 10;
           });*/
-          */
+          
           /*(prop1) => {
           console.log('pries return');
           return yield prop1;
