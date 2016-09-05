@@ -12,14 +12,10 @@ class BslInterpreter {
         this.sayArray = [];
     }
 
-    getProp(prop) {
-      return new Promise((resolve, reject) => {
-          this.bot.getProp(prop).then((prop1) => {
-            console.log('pries resolve');
-            resolve(prop1);
-          });
-          // Do nothing
-          //resolve();
+    *getProp(prop) {
+        this.bot.getProp(prop).then((prop1) => {
+          console.log('pries return');
+          return yield prop1;
       });
     }
 
