@@ -13,6 +13,22 @@ class BslInterpreter {
     }
 
     startInterpret(message) {
+      var count = 0;
+
+      async.whilst(
+          function () {
+            console.log('count:'+count);
+            return count < 5;
+          },
+          function (callback) {
+              count++;
+              setTimeout(function () {
+                  callback(null, count);
+              }, 1000);
+          }
+      );
+      console.log('test');
+      return;
       this.bot.getProp('scenario').then((scenario) => {
         if (typeof scenario === 'undefined') {
           this.scenario = 'main_scenario';

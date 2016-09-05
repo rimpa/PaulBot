@@ -5,7 +5,7 @@ const BslInterpreter = require('./bslInterpreter');
 
 const Script = require('smooch-bot').Script;
 const fs = require('fs');
-//const async = require("async");
+const async = require("async");
 
 module.exports = new Script({
     processing: {
