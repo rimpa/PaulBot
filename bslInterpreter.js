@@ -22,8 +22,11 @@ class BslInterpreter {
     }
 
     getProp(prop) {
-      var gen = this.getPropGen(prop).next();
-      var v = gen.next();
+      var rez1 = this.getPropGen(prop).next();
+      console.log(rez1);
+      var v = this.getPropGen(rez1).next();
+      //console.log(gen);
+      //var v = gen.next();
       console.log('done:'+ gen.done);
       console.log('v:'+v);
 
