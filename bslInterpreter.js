@@ -45,6 +45,7 @@ class BslInterpreter {
           }
         }).then(() => {
           this.interpret(message);
+
           //console.log('ret:'+ret);
           /*.then((ret) => {
             console.log('ret:'+ret);
