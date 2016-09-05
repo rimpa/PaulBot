@@ -93,6 +93,7 @@ class BslInterpreter {
                   console.log(message);
                   this.say('gavau'+message);
                   // collect && validate
+                  return true;
                   if (message) {
                     var collectedValue = validator.trim(message);
                     var collectedVariable = statement.body.collect.body.value.value;
@@ -134,8 +135,8 @@ class BslInterpreter {
                   this.bot.setProp('asked', 'true');
                 }
             });
-            console.log('ask_return_false');
-            return false;
+            //console.log('ask_return_false');
+            //return false;
             break;
         /*case "PLUGIN":
             console.log("Plugin");
