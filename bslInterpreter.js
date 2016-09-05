@@ -13,7 +13,11 @@ class BslInterpreter {
     }
 
     *getProp(prop) {
-      yield 10;
+      var value = yield this.bot.getProp(prop).then((prop1) => {
+        this.getProp().next( prop1 );
+        //return prop1;
+      });
+      return value;
         /*this.bot.getProp(prop).then(
           function*(val) {
             'use strict';
@@ -30,8 +34,9 @@ class BslInterpreter {
 
     startInterpret(message) {
       var scenario = this.getProp('scenario');
-      console.log('scenario:'+scenario.value);
-      console.log('scenario:'+scenario.next().value);
+      console.log('scenario');
+      //console.log('scenario:'+scenario.value);
+      //console.log('scenario:'+scenario.next().value);
       return;
       this.bot.getProp('scenario').then((scenario) => {
         if (typeof scenario === 'undefined') {
