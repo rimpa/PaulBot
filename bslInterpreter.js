@@ -14,6 +14,7 @@ class BslInterpreter {
 
     *getProp(prop) {
       var value = yield this.bot.getProp(prop).then((prop1) => {
+        console.log('scenario1:'+prop1);
         this.getProp().next( prop1 );
         //return prop1;
       });
@@ -34,7 +35,7 @@ class BslInterpreter {
 
     startInterpret(message) {
       var scenario = this.getProp('scenario');
-      console.log('scenario:'+scenario);
+      console.log('scenario2:'+scenario);
       //console.log('scenario:'+scenario.value);
       //console.log('scenario:'+scenario.next().value);
       return;
