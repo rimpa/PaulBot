@@ -29,9 +29,11 @@ class BslInterpreter {
             this.step = step;
           }
         }).then(() => {
-          this.interpret(message).then((ret) => {
+          var ret = this.interpret(message);
+          console.log('ret:'+ret);
+          /*.then((ret) => {
             console.log('ret:'+ret);
-          });
+          });*/
         });
       });
     }
