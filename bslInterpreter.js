@@ -87,6 +87,7 @@ class BslInterpreter {
             return true;
             break;
         case "ASK":
+            console.log('ask1');
             this.bot.getProp('asked').then((asked) => {
                 if (typeof asked !== 'undefined' && asked === 'true') {
                   console.log(message);
@@ -122,6 +123,7 @@ class BslInterpreter {
                     */
                     this.bot.setProp(collectedVariable, collectedValue);
                     this.bot.setProp('asked', 'false');
+                    console.log('ask_return_true');
                     return true;
                   }
                 } else {
@@ -132,52 +134,8 @@ class BslInterpreter {
                   this.bot.setProp('asked', 'true');
                 }
             });
+            console.log('ask_return_false');
             return false;
-            /*if (typeof sess.asked !== 'undefined' && sess.asked) {
-              // collect && validate
-              if (msg) {
-                var collectedValue = validator.trim(msg);
-                var collectedVariable = statement.body.collect.body.value.value;
-                if (typeof statement.body.validate !== 'undefined') {
-                  for (var i = 0, len = statement.body.validate.length; i < len; i++) {
-                    var validate = statement.body.validate[i].body.value;
-                    var funcName = validate.function.value;
-                    var validateFunction = null;
-                    try {
-                      var validateFunction = validator[funcName];// require('./validate/'+ funcName +'.js');
-                    } catch (ex) {
-                      io.emit('chat message', 'Validation function "'+funcName+'" not found.');
-                    }
-                    if (validateFunction) {
-                      //doValidate(validateFunction, )
-                      if (!validateFunction.validate(getParams(validate.params))) {
-                        var randError = getRandomArrayValue(validate.error);
-                        var errText = getRandomArrayValue(randError.body).value;
-                        io.emit('chat message', errText);
-                        return false;
-                      }
-                    }
-                    var randError = getRandomArrayValue(validate.error);
-                    var errText = getRandomArrayValue(randError.body)
-                  }
-                  sess.asked = false;
-                  return true;
-                } else {
-                  sess.collected_value = collectedValue;
-                  sess.collected_variable = collectedVariable;
-                  addVariable(collectedVariable, collectedValue, sess);
-                  sess.asked = false;
-                  return true;
-                }
-              }
-            } else {
-              var randMess = getRandomArrayValue(statement.body.ask);
-              if (typeof randMess.value !== 'undefined') {
-                io.emit('chat message', randMess.value);
-              }
-            }
-            sess.asked = true;
-            return false;*/
             break;
         /*case "PLUGIN":
             console.log("Plugin");
