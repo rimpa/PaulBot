@@ -13,19 +13,23 @@ class BslInterpreter {
     }
 
     *getProp(prop) {
-      var value = yield this.bot.getProp(prop).then((prop1) => {
+      var prom = yield this.bot.getProp(prop);
+      prom.then(function(val) {
+          console.log('scenario1:'+val);
+          return val;
+      });
+      /*var value = yield this.bot.getProp(prop).then((prop1) => {
         console.log('scenario1:'+prop1);
-
         //this.getProp().next( prop1 );
         return prop1;
       });
-      return value;
+      return value;*/
         /*this.bot.getProp(prop).then(
           function*(val) {
             'use strict';
             console.log('pries yield');
             return yield 10;
-          }
+          });*/
           */
           /*(prop1) => {
           console.log('pries return');
@@ -37,8 +41,7 @@ class BslInterpreter {
     startInterpret(message) {
       var scenario = this.getProp('scenario').next();
       //console.log('scenario2:'+scenario);
-
-      console.log(scenario.value);
+      console.log(scenario);
       //console.log('scenario:'+scenario.next().value);
       return;
       this.bot.getProp('scenario').then((scenario) => {
