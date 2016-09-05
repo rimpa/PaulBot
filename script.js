@@ -34,7 +34,7 @@ module.exports = new Script({
             //var programJson = { program: scenarioJson };
             // end compile bsl script
 
-            var bslInterpreter = new BslInterpreter({'bot':bot, 'programJson': scenarioJson, async: async});
+            var bslInterpreter = new BslInterpreter({'bot':bot, 'programJson': scenarioJson});
 
             bslInterpreter.startInterpret(message.text.trim());
             //return bot.getProp('name').then(() => 'speak');
