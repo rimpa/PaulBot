@@ -14,11 +14,18 @@ class BslInterpreter {
 
     *getPropGen(prop) {
       var promise1 = yield this.bot.getProp(prop);
+      console.log('cia1');
+      promise1.then(function(val){
+        console.log('val:'+val);
+        return val;
+      });
     }
 
     getProp(prop) {
       var gen = this.getPropGen(prop).next();
+      var v = gen.next();
       console.log('done:'+ gen.done);
+      console.log('v:'+v);
 
       return "cia bus reiksme";
       /*prom.then(function(val) {
