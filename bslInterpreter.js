@@ -24,11 +24,11 @@ class BslInterpreter {
     getProp(prop) {
       var rez1 = this.getPropGen(prop).next();
       console.log(rez1);
-      var v = this.getPropGen(rez1).next();
+      var v = this.getPropGen(rez1.value).next();
       //console.log(gen);
       //var v = gen.next();
-      console.log('done:'+ gen.done);
-      console.log('v:'+v);
+      console.log('done:'+ rez1.done);
+      console.log(v);
 
       return "cia bus reiksme";
       /*prom.then(function(val) {
