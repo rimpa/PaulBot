@@ -16,6 +16,7 @@ class BslInterpreter {
         this.bot.getProp(prop).then(
           function*(val) {
             'use strict';
+            console.log('pries yield');
             return yield 10;
           }
           /*(prop1) => {
@@ -26,7 +27,7 @@ class BslInterpreter {
 
     startInterpret(message) {
       var scenario = this.getProp('scenario');
-      console.log('scenario:'+scenario);
+      console.log('scenario:'+scenario.value);
       return;
       this.bot.getProp('scenario').then((scenario) => {
         if (typeof scenario === 'undefined') {
