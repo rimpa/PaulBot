@@ -13,20 +13,24 @@ class BslInterpreter {
     }
 
     *getProp(prop) {
-        this.bot.getProp(prop).then(
+      yield 10;
+        /*this.bot.getProp(prop).then(
           function*(val) {
             'use strict';
             console.log('pries yield');
             return yield 10;
           }
+          */
           /*(prop1) => {
           console.log('pries return');
           return yield prop1;
-      }*/);
+      }*/
+      //);
     }
 
     startInterpret(message) {
       var scenario = this.getProp('scenario');
+      console.log('scenario:'+scenario.value);
       console.log('scenario:'+scenario.next().value);
       return;
       this.bot.getProp('scenario').then((scenario) => {
