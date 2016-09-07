@@ -58,6 +58,8 @@ class BslInterpreter {
           this.setStep(0);
           return;
       }
+      console.log(this.scenario);
+      console.log(this.step);
       return this.execStetement(this.message, statementJson);
     }
 
@@ -133,6 +135,24 @@ class BslInterpreter {
             break;
         case "ASK":
             console.log('ask1');
+            if (typeof this.properties['asked'] === 'undefined') {
+              return this.getProperty('asked');
+            }
+            this.asked = this.properties['asked'];
+            if (typeof this.asked === 'undefined') {
+              this.asked = 'false';
+            }
+            if (this.asked === 'true') {
+              console.log(message);
+              this.say('gavau'+message);
+            } else {
+              var randMess = this._getRandomArrayValue(statement.body.ask);
+              if (typeof randMess.value !== 'undefined') {
+                  this.bot.setProp('asked', 'true');
+                  this.say(randMess.value);
+              }
+
+            }
             /*this.bot.getProp('asked').then((asked) => {
                 if (typeof asked !== 'undefined' && asked === 'true') {
                   console.log(message);
@@ -237,6 +257,7 @@ class BslInterpreter {
     say(text, cont) {
       this.bot.say(text).then(() => {
         if (cont === true) {
+          this.increaseStep();
           this._continue();
         }
       });
