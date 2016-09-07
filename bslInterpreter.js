@@ -125,14 +125,14 @@ class BslInterpreter {
               this.properties[collectedVariable] = collectedValue;
               this.asked = 'false';
               console.log('asd4');
-
+              /*
               this.bot.setProp(collectedVariable, collectedValue);
               this.bot.setProp('asked', 'false');
               console.log('asd5');
 
               this.increaseStep();
               console.log('asd6');
-              return this._continue();
+              return this._continue();*/
             } else {
               var randMess = this._getRandomArrayValue(statement.body.ask);
               if (typeof randMess.value !== 'undefined') {
