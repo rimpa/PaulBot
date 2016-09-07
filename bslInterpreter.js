@@ -145,39 +145,25 @@ class BslInterpreter {
             if (this.asked === 'true') {
               console.log(message);
               this.say('gavau'+message);
+              if (message) {
+                var collectedValue = validator.trim(message);
+                var collectedVariable = statement.body.collect.body.value.value;
+
+                this.properties[collectedVariable] = collectedValue;
+                this.asked = 'false';
+                this.bot.setProp(collectedVariable, collectedValue);
+                this.bot.setProp('asked', 'false');
+
+                this.increaseStep();
+                this._continue();
+              }
             } else {
               var randMess = this._getRandomArrayValue(statement.body.ask);
               if (typeof randMess.value !== 'undefined') {
                   this.bot.setProp('asked', 'true');
                   this.say(randMess.value);
               }
-
             }
-            /*this.bot.getProp('asked').then((asked) => {
-                if (typeof asked !== 'undefined' && asked === 'true') {
-                  console.log(message);
-                  this.say('gavau'+message);
-                  // collect && validate
-                  return true;
-                  if (message) {
-                    var collectedValue = validator.trim(message);
-                    var collectedVariable = statement.body.collect.body.value.value;
-
-                    this.bot.setProp(collectedVariable, collectedValue);
-                    this.bot.setProp('asked', 'false');
-                    console.log('ask_return_true');
-                    return true;
-                  }
-                } else {
-                  var randMess = this._getRandomArrayValue(statement.body.ask);
-                  if (typeof randMess.value !== 'undefined') {
-                      this.say(randMess.value);
-                  }
-                  this.bot.setProp('asked', 'true');
-                }
-            });*/
-            //console.log('ask_return_false');
-            //return false;
             break;
         /*case "PLUGIN":
             console.log("Plugin");
