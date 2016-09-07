@@ -112,16 +112,21 @@ class BslInterpreter {
               if (!message) {
                 return;
               }
+              console.log('asd1');
               var collectedValue = message.trim();
+              console.log('asd2');
               var collectedVariable = statement.body.collect.body.value.value;
-
+              console.log('asd3');
               this.properties[collectedVariable] = collectedValue;
               this.asked = 'false';
+              console.log('asd4');
 
               this.bot.setProp(collectedVariable, collectedValue);
               this.bot.setProp('asked', 'false');
+              console.log('asd5');
 
               this.increaseStep();
+              console.log('asd6');
               return this._continue();
             } else {
               var randMess = this._getRandomArrayValue(statement.body.ask);
