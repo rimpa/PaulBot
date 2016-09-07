@@ -247,6 +247,8 @@ class BslInterpreter {
     say(text, cont) {
       this.bot.say(text).then(() => {
         if (cont === true) {
+          console.log('continue');
+          return;
           this._continue();
         }
       });
