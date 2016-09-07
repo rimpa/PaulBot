@@ -12,76 +12,27 @@ class BslInterpreter {
         this.bot = options.bot;
         this.programJson = options.programJson;
         this.sayArray = [];
-
-        //this.it = this.getPropGen();
-    }
-
-    wrap(promise) {
-        promise.then(function(result){
-            this.it.next( result );
-        }, function(err){
-            throw err;
-        });
-    }
-
-    *getPropGen(prop) {
-      var result1 = yield this.bot.getProp(prop).then((val) => { this.it.next(val); });
-      console.log('result');
-      console.log(result1);
-      return result1;
-      /*var promise1 = this.bot.getProp(prop);
-      console.log('cia1');
-      promise1.then(function(val){
-        'use strict';
-        console.log('cia2');
-        console.log('val:'+val);
-
-        yield val;
-      });*/
     }
 
     getProp(prop) {
-      this.it = this.getPropGen();
-      var rez1 = this.it.next(prop);
-      console.log(rez1);
-      //var v = this.getPropGen().next(rez1.value);
-      //console.log(gen);
-      //var v = gen.next();
-      //console.log('done:'+ rez1.done);
-      //console.log(v);
-
-      return "cia bus reiksme";
-      /*prom.then(function(val) {
-          console.log('scenario1:'+val);
-          return val;
-      });*/
-
-      /*var value = yield this.bot.getProp(prop).then((prop1) => {
-        console.log('scenario1:'+prop1);
-        //this.getProp().next( prop1 );
-        return prop1;
+      this.getPropParam = prop;
+      this.bot.getProp(prop).then((val) => {
+        console.log(this.getPropParam);
+        console.log(val);
       });
-      return value;*/
-        /*this.bot.getProp(prop).then(
-          function*(val) {
-            'use strict';
-            console.log('pries yield');
-            return yield 10;
-          });*/
+    }
 
-          /*(prop1) => {
-          console.log('pries return');
-          return yield prop1;
-      }*/
-      //);
+    _continue() {
+      if (typeof this.scenario === 'undefined') {
+        return this.getProp('scenario');
+      }
+      console.log(this.scenario);
+      console.log('last sentence');
     }
 
     startInterpret(message) {
-      var scenario = this.getProp('scenario');
-      //console.log('scenario2:'+scenario);
-      console.log(scenario);
-      //console.log('scenario:'+scenario.next().value);
-      return;
+      this.message = message;
+      return this._continue();
       this.bot.getProp('scenario').then((scenario) => {
         if (typeof scenario === 'undefined') {
           this.scenario = 'main_scenario';
