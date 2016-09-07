@@ -127,6 +127,18 @@ class BslInterpreter {
         this.bot.setProp('scenario',this.scenario);
     }
 
+    textReplace(text) {
+      var matches = text.match(/\$\{[a-z0-9_]+\}/gi);
+      for (val of matches) {
+          var prop = val.substring(2, val.length-1);
+          if (typeof this.properties[prop] !== 'undefined') {
+            var re = new RegExp(val, "gi");
+            text.replace(re, this.properties[prop]);
+          }
+      }
+      return text;
+    }
+
     execStetement(message, statement) {
       //console.log(statement);
       if (typeof statement === 'undefined') { return; }
@@ -137,7 +149,12 @@ class BslInterpreter {
             console.log('say');
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
-              return this.say(randMess.value, true);
+              var text = randMess.value;
+              /*if (!this.preloadTextReplace(text)) {
+                return;
+              }*/
+              text = this.textReplace(text);
+              return this.say(text, true);
             }
             break;
         case "ASK":
@@ -243,23 +260,8 @@ class BslInterpreter {
       }
       return this._getRandomArrayValue(vals);
     }
-/*
-    sayLater(text) {
-      this.sayArray.push(text);
-    }
 
-    sayArrayDelayed() {
-      if (!this.sayArray.length) {
-        return;
-      }
-      this.say(this.sayArray.shift());
-      setTimeout(() => {
-          this.sayArrayDelayed();
-      }, 1000);
-    }
-*/
     say(text, cont) {
-      var name = 'Paulius';
       this.bot.say(text).then(() => {
         if (cont === true) {
           console.log('say continue');
