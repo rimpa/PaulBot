@@ -23,11 +23,14 @@ class BslInterpreter {
     }
 
     _continue() {
+      if (typeof this.properties === 'undefined') {
+        this.properties = [];
+      }
       if (typeof this.properties['scenario'] === 'undefined') {
         return this.getProperty('scenario');
       }
       this.scenario = this.properties['scenario'];
-      
+
       console.log(this.scenario);
       console.log('last sentence');
     }
