@@ -23,10 +23,10 @@ class BslInterpreter {
     }
 
     _continue(scenarioAndStep, debug) {
-      if (debug == 2) {
+      /*if (debug == 2) {
         console.log(this.scenario);
         console.log('step1:'+this.step);
-      }
+      }*/
 
       if (typeof scenarioAndStep === 'undefined') {
         scenarioAndStep = [];
@@ -53,21 +53,21 @@ class BslInterpreter {
         }
       }
 
-
+      /*
       if (debug == 2) {
         console.log(this.scenario);
         console.log('step2:'+this.step);
-      }
+      }*/
 
       if (typeof this.step === 'undefined') {
         if (typeof this.properties['step'] === 'undefined') {
           return this.getProperty('step');
         }
-
+        /*
         if (debug == 2) {
           console.log(this.scenario);
           console.log('step3:'+this.step);
-        }
+        }*/
 
         this.step = this.properties['step'];
         if (typeof this.step === 'undefined') {
@@ -75,11 +75,11 @@ class BslInterpreter {
           this.bot.setProp('step',0);
         }
       }
-
+      /*
       if (debug == 2) {
         console.log(this.scenario);
         console.log('step4:'+this.step);
-      }
+      }*/
 
       if (this.scenario == 'none') {
           var scenario1 = this.getScenario(this.message);
@@ -100,9 +100,9 @@ class BslInterpreter {
       console.log(this.step);
       console.log('statement');
       console.log(statementJson);
-      if (debug == 2) {
+      /*if (debug == 2) {
         return;
-      }
+      }*/
       return this.execStetement(this.message, statementJson);
     }
 
