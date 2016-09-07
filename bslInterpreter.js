@@ -119,7 +119,6 @@ class BslInterpreter {
       switch (statement.statement) {
         case "SAY":
             console.log('say');
-            return;
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
               this.increaseStep();
