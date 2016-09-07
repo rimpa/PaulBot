@@ -112,28 +112,16 @@ class BslInterpreter {
               if (!message) {
                 return;
               }
-              console.log('patekau1');
-              var collectedValue = validator.trim(message);
-              console.log('patekau2');
+              var collectedValue = message.trim();
               var collectedVariable = statement.body.collect.body.value.value;
-              console.log('patekau3');
 
               this.properties[collectedVariable] = collectedValue;
-              console.log('patekau4');
-
               this.asked = 'false';
-              console.log('patekau5');
 
               this.bot.setProp(collectedVariable, collectedValue);
-              console.log('patekau6');
-
               this.bot.setProp('asked', 'false');
-              console.log('patekau7');
-
 
               this.increaseStep();
-              console.log('po padidinimo');
-              console.log(this.step);
               return this._continue();
             } else {
               var randMess = this._getRandomArrayValue(statement.body.ask);
