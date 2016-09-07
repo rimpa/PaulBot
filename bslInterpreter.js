@@ -262,7 +262,7 @@ class BslInterpreter {
       this.bot.say(text).then(() => {
         if (cont === true) {
           console.log('say continue');
-          return;
+          //return;
           this._continue({scenario: this.scenario, step: this.increaseStep() } , 2);
         }
       });
