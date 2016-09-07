@@ -259,6 +259,7 @@ class BslInterpreter {
     }
 */
     say(text, cont) {
+      var name = 'Paulius';
       this.bot.say(text).then(() => {
         if (cont === true) {
           console.log('say continue');
