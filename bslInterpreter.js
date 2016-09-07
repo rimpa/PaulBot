@@ -26,7 +26,6 @@ class BslInterpreter {
       if (debug == 2) {
         console.log(this.scenario);
         console.log(this.step);
-        return;
       }
       if (typeof this.properties === 'undefined') {
         this.properties = [];
@@ -67,6 +66,9 @@ class BslInterpreter {
       console.log(this.step);
       console.log('statement');
       console.log(statementJson);
+      if (debug == 2) {
+        return;
+      }
       return this.execStetement(this.message, statementJson);
     }
 
