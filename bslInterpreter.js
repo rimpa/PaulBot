@@ -109,20 +109,22 @@ class BslInterpreter {
             if (this.asked === 'true') {
               console.log(message);
               this.say('gavau'+message);
-              if (message) {
-                var collectedValue = validator.trim(message);
-                var collectedVariable = statement.body.collect.body.value.value;
-
-                this.properties[collectedVariable] = collectedValue;
-                this.asked = 'false';
-                this.bot.setProp(collectedVariable, collectedValue);
-                this.bot.setProp('asked', 'false');
-
-                this.increaseStep();
-                console.log('po padidinimo');
-                console.log(this.step);
-                this._continue();
+              if (!message) {
+                return;
               }
+              console.log('patekau1');
+              var collectedValue = validator.trim(message);
+              var collectedVariable = statement.body.collect.body.value.value;
+
+              this.properties[collectedVariable] = collectedValue;
+              this.asked = 'false';
+              this.bot.setProp(collectedVariable, collectedValue);
+              this.bot.setProp('asked', 'false');
+
+              this.increaseStep();
+              console.log('po padidinimo');
+              console.log(this.step);
+              this._continue();
             } else {
               var randMess = this._getRandomArrayValue(statement.body.ask);
               if (typeof randMess.value !== 'undefined') {
