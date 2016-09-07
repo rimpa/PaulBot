@@ -28,6 +28,10 @@ class BslInterpreter {
         console.log('step1:'+this.step);
       }
 
+      if (typeof scenarioAndStep === 'undefined') {
+        scenarioAndStep = [];
+      }
+
       if (typeof scenarioAndStep.scenario !== 'undefined') {
         this.scenario = scenarioAndStep.scenario;
       }
