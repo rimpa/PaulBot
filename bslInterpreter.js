@@ -92,9 +92,12 @@ class BslInterpreter {
 
       switch (statement.statement) {
         case "SAY":
+            console.log('say');
+            return;
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
-                return this.say(randMess.value, true);
+              this.increaseStep();
+              return this.say(randMess.value, true);
             }
             break;
         case "ASK":
@@ -219,7 +222,8 @@ class BslInterpreter {
     say(text, cont) {
       this.bot.say(text).then(() => {
         if (cont === true) {
-          this.increaseStep();
+          console.log('continue');
+          return;
           this._continue();
         }
       });
