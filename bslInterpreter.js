@@ -60,50 +60,14 @@ class BslInterpreter {
       }
       console.log(this.scenario);
       console.log(this.step);
+      console.log('statement');
+      console.log(statementJson);
       return this.execStetement(this.message, statementJson);
     }
 
     startInterpret(message) {
       this.message = message;
       return this._continue();
-    }
-
-    interpret(message) {
-        if (this.scenario == 'none') {
-            this.scenario = this.getScenario(message);
-            this.bot.setProp('scenario',this.scenario);
-            this.step = 0;
-            this.bot.setProp('step',this.step);
-        }
-        /*
-        var statementJson = this.getStatement();
-        if (typeof statementJson === 'undefined') {
-            this.setScenario('none');
-            this.setStep(0);
-            return false;
-        }
-        var next = this.execStetement(message, statementJson);
-        if (next) {
-          this.increaseStep();
-          return true;
-        }
-        return false;
-        */
-        var next = true;
-        while (next) {
-            var statementJson = this.getStatement();
-            if (typeof statementJson === 'undefined') {
-                this.setScenario('none');
-                this.setStep(0);
-                break;
-            }
-            next = this.execStetement(message, statementJson);
-            message = '';
-            if (next) {
-                this.increaseStep();
-            }
-        }
-        this.sayArrayDelayed();
     }
 
     increaseStep() {
