@@ -14,18 +14,20 @@ class BslInterpreter {
         this.sayArray = [];
     }
 
-    getProp(prop) {
-      this.getPropParam = prop;
+    getProperty(prop) {
+      this.getPropertyName = prop;
       this.bot.getProp(prop).then((val) => {
-        console.log(this.getPropParam);
-        console.log(val);
+        this.properties[this.getPropertyName] = val;
+        this._continue();
       });
     }
 
     _continue() {
-      if (typeof this.scenario === 'undefined') {
-        return this.getProp('scenario');
+      if (typeof this.properties['scenario'] === 'undefined') {
+        return this.getProperty('scenario');
       }
+      this.scenario = this.properties['scenario'];
+      
       console.log(this.scenario);
       console.log('last sentence');
     }
