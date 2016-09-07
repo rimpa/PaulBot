@@ -138,6 +138,9 @@ class BslInterpreter {
             console.log('tr3');
             var prop = val.substring(2, val.length-1);
             console.log('tr4');
+            console.log(prop);
+            console.log(this.properties[prop]);
+
             if (typeof this.properties[prop] !== 'undefined') {
               console.log('tr5');
               var re = new RegExp(val, "gi");
