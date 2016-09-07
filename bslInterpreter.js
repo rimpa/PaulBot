@@ -11,7 +11,7 @@ class BslInterpreter {
         this.programJson = options.programJson;
         this.sayArray = [];
 
-        this.it = this.getPropGen();
+        //this.it = this.getPropGen();
     }
 
     wrap(promise) {
@@ -39,7 +39,8 @@ class BslInterpreter {
     }
 
     getProp(prop) {
-      var rez1 = this.getPropGen(prop).next();
+      this.it = this.getPropGen(prop);
+      var rez1 = this.it.next();
       console.log(rez1);
       //var v = this.getPropGen().next(rez1.value);
       //console.log(gen);
