@@ -128,12 +128,19 @@ class BslInterpreter {
     }
 
     textReplace(text) {
+      console.log('tr1');
       var matches = text.match(/\$\{[a-z0-9_]+\}/gi);
+      console.log('tr2');
       for (val of matches) {
+          console.log('tr3');
           var prop = val.substring(2, val.length-1);
+          console.log('tr4');
           if (typeof this.properties[prop] !== 'undefined') {
+            console.log('tr5');
             var re = new RegExp(val, "gi");
+            console.log('tr6');
             text.replace(re, this.properties[prop]);
+            console.log('tr7');
           }
       }
       return text;
