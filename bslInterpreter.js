@@ -18,25 +18,35 @@ class BslInterpreter {
       this.getPropertyName = prop;
       this.bot.getProp(prop).then((val) => {
         this.properties[this.getPropertyName] = val;
-        this._continue();
+        this._continue({scenario: this.scenario, step: this.step });
       });
     }
 
-    _continue(debug) {
+    _continue(scenarioAndStep, debug) {
       if (debug == 2) {
         console.log(this.scenario);
         console.log('step1:'+this.step);
       }
+
+      if (typeof scenarioAndStep.scenario !== 'undefined') {
+        this.scenario = scenarioAndStep.scenario;
+      }
+      if (typeof scenarioAndStep.step !== 'undefined') {
+        this.step = scenarioAndStep.step;
+      }
       if (typeof this.properties === 'undefined') {
         this.properties = [];
       }
-      if (typeof this.properties['scenario'] === 'undefined') {
-        return this.getProperty('scenario');
-      }
-      this.scenario = this.properties['scenario'];
+
       if (typeof this.scenario === 'undefined') {
-        this.scenario = 'main_scenario';
-        this.bot.setProp('scenario','main_scenario');
+        if (typeof this.properties['scenario'] === 'undefined') {
+          return this.getProperty('scenario');
+        }
+        this.scenario = this.properties['scenario'];
+        if (typeof this.scenario === 'undefined') {
+          this.scenario = 'main_scenario';
+          this.bot.setProp('scenario','main_scenario');
+        }
       }
 
 
@@ -45,20 +55,21 @@ class BslInterpreter {
         console.log('step2:'+this.step);
       }
 
-      if (typeof this.properties['step'] === 'undefined') {
-        return this.getProperty('step');
-      }
-
-
-      if (debug == 2) {
-        console.log(this.scenario);
-        console.log('step3:'+this.step);
-      }
-
-      this.step = this.properties['step'];
       if (typeof this.step === 'undefined') {
-        this.step = 0;
-        this.bot.setProp('step',0);
+        if (typeof this.properties['step'] === 'undefined') {
+          return this.getProperty('step');
+        }
+
+        if (debug == 2) {
+          console.log(this.scenario);
+          console.log('step3:'+this.step);
+        }
+
+        this.step = this.properties['step'];
+        if (typeof this.step === 'undefined') {
+          this.step = 0;
+          this.bot.setProp('step',0);
+        }
       }
 
       if (debug == 2) {
@@ -67,11 +78,11 @@ class BslInterpreter {
       }
 
       if (this.scenario == 'none') {
-          var scenario = this.getScenario(this.message);
-          if (scenario == 'none') {
+          var scenario1 = this.getScenario(this.message);
+          if (scenario1 == 'none') {
             return;
           }
-          this.setScenario(scenario);
+          this.setScenario(scenario1);
           this.setStep(0);
       }
 
@@ -99,6 +110,7 @@ class BslInterpreter {
     increaseStep() {
         this.step = this.step + 1;
         this.bot.setProp('step',this.step);
+        return this.step;
     }
 
     setStep(step) {
@@ -121,7 +133,6 @@ class BslInterpreter {
             console.log('say');
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
-              this.increaseStep();
               return this.say(randMess.value, true);
             }
             break;
@@ -158,9 +169,8 @@ class BslInterpreter {
               this.bot.setProp('asked', 'false');
               console.log('asd5');
 
-              this.increaseStep();
               console.log('asd6');
-              return this._continue(2);
+              return this._continue({scenario: this.scenario, step: this.increaseStep() } , 2);
             } else {
               var randMess = this._getRandomArrayValue(statement.body.ask);
               if (typeof randMess.value !== 'undefined') {
@@ -247,9 +257,9 @@ class BslInterpreter {
     say(text, cont) {
       this.bot.say(text).then(() => {
         if (cont === true) {
-          console.log('continue');
+          console.log('say continue');
           return;
-          this._continue();
+          this._continue({scenario: this.scenario, step: this.increaseStep() } , 2);
         }
       });
     }
