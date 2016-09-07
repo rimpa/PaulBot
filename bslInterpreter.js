@@ -10,10 +10,24 @@ class BslInterpreter {
         this.bot = options.bot;
         this.programJson = options.programJson;
         this.sayArray = [];
+
+        this.it = this.getPropGen();
+    }
+
+    wrap(promise) {
+        promise.then(function(result){
+            this.it.next( result );
+        }, function(err){
+            throw err;
+        });
     }
 
     *getPropGen(prop) {
-      var promise1 = this.bot.getProp(prop);
+      var result1 = yield this.wrap(this.bot.getProp(prop));
+      console.log('result');
+      console.log(result1);
+      return result1;
+      /*var promise1 = this.bot.getProp(prop);
       console.log('cia1');
       promise1.then(function(val){
         'use strict';
@@ -21,8 +35,7 @@ class BslInterpreter {
         console.log('val:'+val);
 
         yield val;
-        //return val;
-      });
+      });*/
     }
 
     getProp(prop) {
