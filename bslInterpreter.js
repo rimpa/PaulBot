@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 class BslInterpreter {
     constructor(options) {
         options = options || {};
@@ -23,7 +25,7 @@ class BslInterpreter {
     }
 
     *getPropGen(prop) {
-      var result1 = yield this.wrap(this.bot.getProp(prop));
+      var result1 = yield this.bot.getProp(prop).then((val) => { this.it.next(val); });
       console.log('result');
       console.log(result1);
       return result1;
@@ -39,8 +41,8 @@ class BslInterpreter {
     }
 
     getProp(prop) {
-      this.it = this.getPropGen(prop);
-      var rez1 = this.it.next();
+      this.it = this.getPropGen();
+      var rez1 = this.it.next(prop);
       console.log(rez1);
       //var v = this.getPropGen().next(rez1.value);
       //console.log(gen);
