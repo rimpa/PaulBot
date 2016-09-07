@@ -16,9 +16,10 @@ class BslInterpreter {
       var promise1 = this.bot.getProp(prop);
       console.log('cia1');
       promise1.then(function(val){
+        'use strict';
         console.log('cia2');
         console.log('val:'+val);
-        
+
         yield val;
         //return val;
       });
