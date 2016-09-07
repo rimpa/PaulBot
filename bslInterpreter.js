@@ -11,13 +11,13 @@ class BslInterpreter {
         }
         this.bot = options.bot;
         this.programJson = options.programJson;
-        this.properties = [];
+        this.props = [];
     }
 
     getProperty(prop) {
       this.getPropertyName = prop;
       this.bot.getProp(prop).then((val) => {
-        this.properties[this.getPropertyName] = val;
+        this.props[this.getPropertyName] = val;
         this._continue({scenario: this.scenario, step: this.step });
       });
     }
@@ -40,10 +40,10 @@ class BslInterpreter {
       }
 
       if (typeof this.scenario === 'undefined') {
-        if (typeof this.properties['scenario'] === 'undefined') {
+        if (typeof this.props['scenario'] === 'undefined') {
           return this.getProperty('scenario');
         }
-        this.scenario = this.properties['scenario'];
+        this.scenario = this.props['scenario'];
         if (typeof this.scenario === 'undefined') {
           this.scenario = 'main_scenario';
           this.bot.setProp('scenario','main_scenario');
@@ -57,7 +57,7 @@ class BslInterpreter {
       }*/
 
       if (typeof this.step === 'undefined') {
-        if (typeof this.properties['step'] === 'undefined') {
+        if (typeof this.props['step'] === 'undefined') {
           return this.getProperty('step');
         }
         /*
@@ -66,7 +66,7 @@ class BslInterpreter {
           console.log('step3:'+this.step);
         }*/
 
-        this.step = this.properties['step'];
+        this.step = this.props['step'];
         if (typeof this.step === 'undefined') {
           this.step = 0;
           this.bot.setProp('step',0);
@@ -136,14 +136,14 @@ class BslInterpreter {
             var prop = val.substring(2, val.length-1);
             console.log('tr4');
             console.log(prop);
-            console.log(this.properties);
-            console.log(this.properties[prop]);
+            console.log(this.props);
+            console.log(this.props[prop]);
 
-            if (typeof this.properties[prop] !== 'undefined') {
+            if (typeof this.props[prop] !== 'undefined') {
               console.log('tr5');
               var re = new RegExp(val, "gi");
               console.log('tr6');
-              text.replace(re, this.properties[prop]);
+              text.replace(re, this.props[prop]);
               console.log('tr7');
             }
         });
@@ -171,10 +171,10 @@ class BslInterpreter {
             break;
         case "ASK":
             console.log('ask1');
-            if (typeof this.properties['asked'] === 'undefined') {
+            if (typeof this.props['asked'] === 'undefined') {
               return this.getProperty('asked');
             }
-            this.asked = this.properties['asked'];
+            this.asked = this.props['asked'];
             if (typeof this.asked === 'undefined') {
               this.asked = 'false';
             }
@@ -194,7 +194,7 @@ class BslInterpreter {
               var collectedVariable = statement.body.save.body.value.value;
               console.log('var:'+collectedVariable);
               console.log('val:'+collectedValue);
-              this.properties[collectedVariable] = collectedValue;
+              this.props[collectedVariable] = collectedValue;
               this.asked = 'false';
               console.log('asd4');
 
