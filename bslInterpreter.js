@@ -129,7 +129,7 @@ class BslInterpreter {
       var matches = text.match(/\$\{[a-z0-9_]+\}/gi);
       console.log('tr2');
       console.log(matches);
-      if (matches.length > 0) {
+      if (matches) {
         console.log('tr2.2');
         matches.forEach((val) => {
             console.log('tr3');
