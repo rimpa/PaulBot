@@ -25,7 +25,7 @@ class BslInterpreter {
     _continue(debug) {
       if (debug == 2) {
         console.log(this.scenario);
-        console.log(this.step);
+        console.log('step1:'+this.step);
       }
       if (typeof this.properties === 'undefined') {
         this.properties = [];
@@ -38,13 +38,32 @@ class BslInterpreter {
         this.scenario = 'main_scenario';
         this.bot.setProp('scenario','main_scenario');
       }
+
+
+      if (debug == 2) {
+        console.log(this.scenario);
+        console.log('step2:'+this.step);
+      }
+
       if (typeof this.properties['step'] === 'undefined') {
         return this.getProperty('step');
       }
+
+
+      if (debug == 2) {
+        console.log(this.scenario);
+        console.log('step3:'+this.step);
+      }
+
       this.step = this.properties['step'];
       if (typeof this.step === 'undefined') {
         this.step = 0;
         this.bot.setProp('step',0);
+      }
+
+      if (debug == 2) {
+        console.log(this.scenario);
+        console.log('step4:'+this.step);
       }
 
       if (this.scenario == 'none') {
