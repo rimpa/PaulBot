@@ -22,7 +22,12 @@ class BslInterpreter {
       });
     }
 
-    _continue() {
+    _continue(debug) {
+      if (debug == 2) {
+        console.log(this.scenario);
+        console.log(this.step);
+        return;
+      }
       if (typeof this.properties === 'undefined') {
         this.properties = [];
       }
@@ -135,7 +140,7 @@ class BslInterpreter {
 
               this.increaseStep();
               console.log('asd6');
-              return this._continue();
+              return this._continue(2);
             } else {
               var randMess = this._getRandomArrayValue(statement.body.ask);
               if (typeof randMess.value !== 'undefined') {
