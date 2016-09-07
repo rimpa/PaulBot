@@ -42,33 +42,28 @@ class BslInterpreter {
         this.step = 0;
         this.bot.setProp('step',0);
       }
-      
-      console.log(this.scenario);
-      console.log('last sentence');
+
+      if (this.scenario == 'none') {
+          var scenario = this.getScenario(this.message);
+          if (scenario == 'none') {
+            return;
+          }
+          this.setScenario(scenario);
+          this.setStep(0);
+      }
+
+      var statementJson = this.getStatement();
+      if (typeof statementJson === 'undefined') {
+          this.setScenario('none');
+          this.setStep(0);
+          return;
+      }
+      return this.execStetement(this.message, statementJson);
     }
 
     startInterpret(message) {
       this.message = message;
       return this._continue();
-      this.bot.getProp('scenario').then((scenario) => {
-        if (typeof scenario === 'undefined') {
-          this.scenario = 'main_scenario';
-          this.bot.setProp('scenario','main_scenario');
-        } else {
-          this.scenario = scenario;
-        }
-      }).then(() => {
-        this.bot.getProp('step').then((step) => {
-          if (typeof step === 'undefined') {
-            this.step = 0;
-            this.bot.setProp('step',0);
-          } else {
-            this.step = step;
-          }
-        }).then(() => {
-          this.interpret(message);
-        });
-      });
     }
 
     interpret(message) {
@@ -126,20 +121,19 @@ class BslInterpreter {
 
     execStetement(message, statement) {
       //console.log(statement);
-      if (typeof statement === 'undefined') { return false; }
-      if (typeof statement.statement === 'undefined') { return false; }
+      if (typeof statement === 'undefined') { return; }
+      if (typeof statement.statement === 'undefined') { return; }
 
       switch (statement.statement) {
         case "SAY":
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
-                this.sayLater(randMess.value);
+                return this.say(randMess.value, true);
             }
-            return true;
             break;
         case "ASK":
             console.log('ask1');
-            this.bot.getProp('asked').then((asked) => {
+            /*this.bot.getProp('asked').then((asked) => {
                 if (typeof asked !== 'undefined' && asked === 'true') {
                   console.log(message);
                   this.say('gavau'+message);
@@ -148,31 +142,7 @@ class BslInterpreter {
                   if (message) {
                     var collectedValue = validator.trim(message);
                     var collectedVariable = statement.body.collect.body.value.value;
-                    /*if (typeof statement.body.validate !== 'undefined') {
-                      for (var i = 0, len = statement.body.validate.length; i < len; i++) {
-                        var validate = statement.body.validate[i].body.value;
-                        var funcName = validate.function.value;
-                        var validateFunction = null;
-                        try {
-                          var validateFunction = validator[funcName];// require('./validate/'+ funcName +'.js');
-                        } catch (ex) {
-                          this.say('Validation function "'+funcName+'" not found.');
-                        }
-                        if (validateFunction) {
-                          if (!validateFunction.validate(getParams(validate.params))) {
-                            var randError = this._getRandomArrayValue(validate.error);
-                            var errText = this._getRandomArrayValue(randError.body).value;
-                            this.say(errText);
-                            return false;
-                          }
-                        }
-                        var randError = this._getRandomArrayValue(validate.error);
-                        var errText = this._getRandomArrayValue(randError.body)
-                      }
-                      this.bot.setProp('asked', 'false');
-                      return true;
-                    }
-                    */
+
                     this.bot.setProp(collectedVariable, collectedValue);
                     this.bot.setProp('asked', 'false');
                     console.log('ask_return_true');
@@ -185,7 +155,7 @@ class BslInterpreter {
                   }
                   this.bot.setProp('asked', 'true');
                 }
-            });
+            });*/
             //console.log('ask_return_false');
             //return false;
             break;
@@ -249,7 +219,7 @@ class BslInterpreter {
       }
       return this._getRandomArrayValue(vals);
     }
-
+/*
     sayLater(text) {
       this.sayArray.push(text);
     }
@@ -263,9 +233,13 @@ class BslInterpreter {
           this.sayArrayDelayed();
       }, 1000);
     }
-
-    say(text) {
-      this.bot.say(text);
+*/
+    say(text, cont) {
+      this.bot.say(text).then(() => {
+        if (cont === true) {
+          this._continue();
+        }
+      });
     }
 }
 
