@@ -71,7 +71,7 @@ class BslInterpreter {
     }
 
     increaseStep() {
-        this.step++;
+        this.step = this.step + 1;
         this.bot.setProp('step',this.step);
     }
 
