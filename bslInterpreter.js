@@ -11,7 +11,7 @@ class BslInterpreter {
         }
         this.bot = options.bot;
         this.programJson = options.programJson;
-        this.sayArray = [];
+        this.properties = [];
     }
 
     getProperty(prop) {
@@ -37,9 +37,6 @@ class BslInterpreter {
       }
       if (typeof scenarioAndStep.step !== 'undefined') {
         this.step = scenarioAndStep.step;
-      }
-      if (typeof this.properties === 'undefined') {
-        this.properties = [];
       }
 
       if (typeof this.scenario === 'undefined') {
@@ -139,6 +136,7 @@ class BslInterpreter {
             var prop = val.substring(2, val.length-1);
             console.log('tr4');
             console.log(prop);
+            console.log(this.properties);
             console.log(this.properties[prop]);
 
             if (typeof this.properties[prop] !== 'undefined') {
