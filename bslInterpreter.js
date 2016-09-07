@@ -13,9 +13,10 @@ class BslInterpreter {
     }
 
     *getPropGen(prop) {
-      var promise1 = yield this.bot.getProp(prop);
+      var promise1 = this.bot.getProp(prop);
       console.log('cia1');
-      promise1.then(function(val){
+      yield promise1.then(function(val){
+        console.log('cia2');
         console.log('val:'+val);
         return val;
       });
