@@ -131,11 +131,12 @@ class BslInterpreter {
       console.log(matches);
       if (matches.length > 0) {
         console.log('tr2.2');
-        matches.forEach(function(val) {
+        matches.forEach((val) => {
             console.log('tr3');
             var prop = val.substring(2, val.length-1);
             console.log('tr4');
             console.log(prop);
+
             console.log(this.props);
             console.log(this.props[prop]);
 
