@@ -119,6 +119,8 @@ class BslInterpreter {
                 this.bot.setProp('asked', 'false');
 
                 this.increaseStep();
+                console.log('po padidinimo');
+                console.log(this.step);
                 this._continue();
               }
             } else {
