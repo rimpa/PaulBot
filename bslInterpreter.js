@@ -30,7 +30,19 @@ class BslInterpreter {
         return this.getProperty('scenario');
       }
       this.scenario = this.properties['scenario'];
-
+      if (typeof this.scenario === 'undefined') {
+        this.scenario = 'main_scenario';
+        this.bot.setProp('scenario','main_scenario');
+      }
+      if (typeof this.properties['step'] === 'undefined') {
+        return this.getProperty('step');
+      }
+      this.step = this.properties['step'];
+      if (typeof this.step === 'undefined') {
+        this.step = 0;
+        this.bot.setProp('step',0);
+      }
+      
       console.log(this.scenario);
       console.log('last sentence');
     }
