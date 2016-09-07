@@ -115,7 +115,11 @@ class BslInterpreter {
               console.log('asd1');
               var collectedValue = message.trim();
               console.log('asd2');
-              var collectedVariable = statement.body.collect.body.value.value;
+              console.log('asd2');
+              console.log(statement.body);
+              console.log(statement.body.save);
+
+              var collectedVariable = statement.body.save.body.value.value;
               console.log('asd3');
               this.properties[collectedVariable] = collectedValue;
               this.asked = 'false';
