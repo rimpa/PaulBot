@@ -82,7 +82,7 @@ class BslInterpreter {
       }
       console.log(this.scenario+' '+this.step+' '+debug+' '+caller_debug);
       if (typeof statementJson !== 'undefined') {
-        console.log('EXECUTE:'statementJson.statement);
+        console.log('EXECUTE:'+statementJson.statement);
       }
       return this.execStetement(this.message, statementJson);
     }
