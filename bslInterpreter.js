@@ -107,34 +107,32 @@ class BslInterpreter {
         this.bot.setProp('scenario',this.scenario);
     }
 
-    textReplace(text) {
-      console.log('tr1:'+this.scenario+' '+this.step+' '+this.debug+' '+this.caller_debug);
-
+    variablesReplace(text) {
       var matches = text.match(/\$\{[a-z0-9_]+\}/gi);
-      console.log('tr2');
-      console.log(matches);
       if (matches) {
-        console.log('tr2.2');
         matches.forEach((val) => {
-            console.log('tr3');
             var prop = val.substring(2, val.length-1);
-            console.log('tr4');
-            console.log(prop);
-
-            console.log(this.props);
-            console.log(this.props[prop]);
-
             if (typeof this.props[prop] !== 'undefined') {
-              console.log('tr5');
               var re = new RegExp('\\$\\{'+prop+'\\}', "gi");
-              console.log('tr6');
               text = text.replace(re, this.props[prop]);
-              console.log(text);
-              console.log('tr7');
             }
         });
       }
       return text;
+    }
+
+    loadVariables(text) {
+      var matches = text.match(/\$\{[a-z0-9_]+\}/gi);
+      if (matches) {
+        matches.forEach((val) => {
+          var prop = val.substring(2, val.length-1);
+          if (typeof this.props[prop] === 'undefined') {
+            this.getProperty(prop);
+            return false;
+          }
+        }
+      }
+      return true;
     }
 
     execStetement(message, statement) {
@@ -148,10 +146,10 @@ class BslInterpreter {
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
               var text = randMess.value;
-              /*if (!this.preloadTextReplace(text)) {
+              if (!this.loadVariables(text)) {
                 return;
-              }*/
-              text = this.textReplace(text);
+              }
+              text = this.variablesReplace(text);
               return this.say(text, true);
             }
             break;
