@@ -132,7 +132,6 @@ class BslInterpreter {
           matches.forEach((val) => {
             var prop = val.substring(2, val.length-1);
             if (typeof this.props[prop] === 'undefined') {
-              console.log('Reikia loadinti:'+prop);
               this.getProperty(prop);
               success = false;
               throw BreakException;
@@ -157,7 +156,6 @@ class BslInterpreter {
             if (typeof randMess.value !== 'undefined') {
               var text = randMess.value;
               var success = this.loadVariables(text)
-              console.log('success:'+success);
               if (success !== true) {
                 return;
               }
@@ -176,33 +174,38 @@ class BslInterpreter {
               this.asked = 'false';
             }
             if (this.asked === 'true') {
-              console.log('ask_issaugome');
-              console.log(message);
               if (!message) {
                 return;
               }
               var collectedValue = message.trim();
-              console.log(statement.body);
-              console.log(statement.body.save);
 
               var collectedVariable = statement.body.save.body.value.value;
               console.log('save var:'+collectedVariable+' val:'+collectedValue);
               this.props[collectedVariable] = collectedValue;
+
               this.asked = 'false';
               this.props['asked'] = 'false';
-
               this.bot.setProp(collectedVariable, collectedValue);
               this.bot.setProp('asked', 'false');
 
-              console.log('ask_issaugome_end');
               return this._continue({scenario: this.scenario, step: this.increaseStep(), asked:'false' } , Math.random().toString(36).substring(5), 'ask2:' + this.debug);
             } else {
               console.log('ask_paklausiame');
               var randMess = this._getRandomArrayValue(statement.body.ask);
               if (typeof randMess.value !== 'undefined') {
+
+                  var text = randMess.value;
+                  var success = this.loadVariables(text)
+                  if (success !== true) {
+                    return;
+                  }
+                  text = this.variablesReplace(text);
+
                   this.asked = 'true';
+                  this.prop['asked'] = 'true';
                   this.bot.setProp('asked', 'true');
-                  return this.say(randMess.value);
+
+                  return this.say(text);
               }
             }
             break;
