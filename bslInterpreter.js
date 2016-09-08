@@ -27,8 +27,8 @@ class BslInterpreter {
       this.caller_debug = caller_debug;
       console.log('cont1'+this.scenario+' '+this.step+' '+debug+' '+caller_debug);
 
-      if (typeof scenarioAndStep === 'undefined') {
-        scenarioAndStep = [];
+      if (typeof options === 'undefined') {
+        options = [];
       }
 
       if (typeof options.scenario !== 'undefined') {
