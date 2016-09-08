@@ -126,7 +126,7 @@ class BslInterpreter {
 
             if (typeof this.props[prop] !== 'undefined') {
               console.log('tr5');
-              var re = new RegExp(val, "gi");
+              var re = new RegExp('\$\{'+prop+'\}', "gi");
               console.log('tr6');
               text.replace(re, this.props[prop]);
               console.log(text);
