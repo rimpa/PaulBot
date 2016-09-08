@@ -202,7 +202,7 @@ class BslInterpreter {
                   text = this.variablesReplace(text);
 
                   this.asked = 'true';
-                  this.prop['asked'] = 'true';
+                  this.props['asked'] = 'true';
                   this.bot.setProp('asked', 'true');
 
                   return this.say(text);
