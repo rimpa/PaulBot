@@ -117,7 +117,43 @@ function handlePostback(req, res) {
 }
 
 app.post('/webhook', function(req, res, next) {
-    const trigger = req.body.trigger;
+  var isPostback = req.body.trigger == "postback";
+  var msg = '';
+
+  const appUser = req.body.appUser;
+  const userId = appUser.userId || appUser._id;
+  const stateMachine = new StateMachine({
+      script,
+      bot: new createBot(appUser)
+  });
+
+  if(!isPostback) {
+      const messages = req.body.messages.reduce((prev, current) => {
+          if (current.role === 'appUser') {
+              prev.push(current);
+          }
+          return prev;
+      }, []);
+
+      if (messages.length === 0 && !isTrigger) {
+          return res.end();
+      }
+
+      msg = messages[0];
+  } else {
+      msg = req.body.postbacks[0];
+      msg.text = msg.action.payload;
+  }
+
+  stateMachine.receiveMessage(msg)
+      .then(() => res.end())
+      .catch((err) => {
+          console.error('SmoochBot error:', err);
+          console.error(err.stack);
+          res.end();
+      });
+
+    /*const trigger = req.body.trigger;
 
     switch (trigger) {
         case 'message:appUser':
@@ -130,7 +166,7 @@ app.post('/webhook', function(req, res, next) {
 
         default:
             console.log('Ignoring unknown webhook trigger:', trigger);
-    }
+    }*/
 });
 
 var server = app.listen(process.env.PORT || 8000, function() {
