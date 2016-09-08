@@ -91,6 +91,7 @@ class BslInterpreter {
 
     startInterpret(message) {
       this.message = message;
+      console.log('interpretThis:'+message);
       return this._continue();
     }
 
