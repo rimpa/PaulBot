@@ -81,7 +81,9 @@ class BslInterpreter {
           return;
       }
       console.log(this.scenario+' '+this.step+' '+debug+' '+caller_debug);
-      console.log(statementJson);
+      if (typeof statementJson !== 'undefined') {
+        console.log('EXECUTE:'statementJson.statement);
+      }
       return this.execStetement(this.message, statementJson);
     }
 
@@ -167,25 +169,19 @@ class BslInterpreter {
               if (!message) {
                 return;
               }
-              console.log('asd1');
               var collectedValue = message.trim();
-              console.log('asd2');
-              console.log('asd2');
               console.log(statement.body);
               console.log(statement.body.save);
 
               var collectedVariable = statement.body.save.body.value.value;
-              console.log('var:'+collectedVariable);
-              console.log('val:'+collectedValue);
+              console.log('save var:'+collectedVariable+' val:'+collectedValue);
               this.props[collectedVariable] = collectedValue;
               this.asked = 'false';
-              console.log('asd4');
 
               this.bot.setProp(collectedVariable, collectedValue);
               this.bot.setProp('asked', 'false');
-              console.log('asd5');
 
-              console.log('asd6');
+              console.log('ask_issaugome_end');
               return this._continue({scenario: this.scenario, step: this.increaseStep(), asked:'false' } , Math.random().toString(36).substring(5), 'ask2:' + this.debug);
             } else {
               console.log('ask_paklausiame');
