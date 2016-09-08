@@ -129,6 +129,7 @@ class BslInterpreter {
               var re = new RegExp(val, "gi");
               console.log('tr6');
               text.replace(re, this.props[prop]);
+              console.log(text);
               console.log('tr7');
             }
         });
