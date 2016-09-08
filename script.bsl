@@ -33,5 +33,13 @@ SAY       "Great! I'll call you ${name}"
 ASK       "${name}, where there are you from?"
 SAVE      from
 SAY       "Great! ${name} You are from ${from}"
-SAY       "Is that OK? %[Yes](postback:yes) %[No](postback:no)"
+SAY       "Is that OK? %[Yes](postback:name_save_yes) %[No](postback:name_save_no)"
+END
+
+SCENARIO NAME_SAVE_YES "name_save_yes"
+SAY       "${name} you said Yes"
+END
+
+SCENARIO NAME_SAVE_NO "name_save_no"
+SAY       "${name} you said No"
 END
