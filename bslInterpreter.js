@@ -22,20 +22,23 @@ class BslInterpreter {
       });
     }
 
-    _continue(scenarioAndStep, debug, caller_debug) {
+    _continue(options, debug, caller_debug) {
       this.debug = debug;
       this.caller_debug = caller_debug;
-      console.log(this.scenario+' '+this.step+' '+debug+' '+caller_debug);
+      console.log('cont1'+this.scenario+' '+this.step+' '+debug+' '+caller_debug);
 
       if (typeof scenarioAndStep === 'undefined') {
         scenarioAndStep = [];
       }
 
-      if (typeof scenarioAndStep.scenario !== 'undefined') {
-        this.scenario = scenarioAndStep.scenario;
+      if (typeof options.scenario !== 'undefined') {
+        this.scenario = options.scenario;
       }
-      if (typeof scenarioAndStep.step !== 'undefined') {
-        this.step = scenarioAndStep.step;
+      if (typeof options.step !== 'undefined') {
+        this.step = options.step;
+      }
+      if (typeof options.asked !== 'undefined') {
+        this.asked = options.step;
       }
 
       if (typeof this.scenario === 'undefined') {
@@ -49,13 +52,10 @@ class BslInterpreter {
         }
       }
 
-      console.log(this.scenario+' '+this.step+' '+debug+' '+caller_debug);
-
       if (typeof this.step === 'undefined') {
         if (typeof this.props['step'] === 'undefined') {
           return this.getProperty('step');
         }
-        console.log(this.scenario+' '+this.step+' '+debug+' '+caller_debug);
 
         this.step = this.props['step'];
         if (typeof this.step === 'undefined') {
@@ -63,7 +63,6 @@ class BslInterpreter {
           this.bot.setProp('step',0);
         }
       }
-      console.log(this.scenario+' '+this.step+' '+debug+' '+caller_debug);
 
       if (this.scenario == 'none') {
           var scenario1 = this.getScenario(this.message);
@@ -154,7 +153,7 @@ class BslInterpreter {
             }
             break;
         case "ASK":
-            console.log('ask1');
+            console.log('ask_pradzia');
             if (typeof this.props['asked'] === 'undefined') {
               return this.getProperty('asked');
             }
@@ -163,6 +162,7 @@ class BslInterpreter {
               this.asked = 'false';
             }
             if (this.asked === 'true') {
+              console.log('ask_issaugome');
               console.log(message);
               if (!message) {
                 return;
@@ -186,10 +186,12 @@ class BslInterpreter {
               console.log('asd5');
 
               console.log('asd6');
-              return this._continue({scenario: this.scenario, step: this.increaseStep() } , Math.random().toString(36).substring(5), 'ask2:' + this.debug);
+              return this._continue({scenario: this.scenario, step: this.increaseStep(), asked:'false' } , Math.random().toString(36).substring(5), 'ask2:' + this.debug);
             } else {
+              console.log('ask_paklausiame');
               var randMess = this._getRandomArrayValue(statement.body.ask);
               if (typeof randMess.value !== 'undefined') {
+                  this.asked = 'true';
                   this.bot.setProp('asked', 'true');
                   return this.say(randMess.value);
               }
