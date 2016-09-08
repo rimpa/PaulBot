@@ -146,9 +146,9 @@ class BslInterpreter {
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
               var text = randMess.value;
-              if (!this.loadVariables(text)) {
+              /*if (!this.loadVariables(text)) {
                 return;
-              }
+              }*/
               text = this.variablesReplace(text);
               return this.say(text, true);
             }
