@@ -21,10 +21,17 @@ SAY       "My creator Paulius Rimavičius is an entrepreneur and a developer wit
 SAY       "test 1"
 END
 
+SCENARIO ME "me"
+SAY       "Hi ${name}!"
+SAY       "You are from ${from}"
+END
+
 SCENARIO  NAME "name"
 ASK       "What\'s your name?"
 SAVE      name
 SAY       "Great! I'll call you ${name}"
-SAY       "${name}, where there are you from?"
-SAY       "Is that OK? %[Yes](postback:yes) %[No](postback:no)"
+ASK       "${name}, where there are you from?"
+SAVE      from
+SAY       "Great! You are from ${from}"
+ASK       "Is that OK? %[Yes](postback:yes) %[No](postback:no)"
 END
