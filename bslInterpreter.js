@@ -128,7 +128,7 @@ class BslInterpreter {
               console.log('tr5');
               var re = new RegExp('\$\{'+prop+'\}', "gi");
               console.log('tr6');
-              text.replace(re, this.props[prop]);
+              text = text.replace(re, this.props[prop]);
               console.log(text);
               console.log('tr7');
             }
