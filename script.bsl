@@ -25,5 +25,6 @@ SCENARIO  NAME "name"
 ASK       "What\'s your name?"
 SAVE      name
 SAY       "Great! I'll call you ${name}"
+SAY       "${Paulius}, where there are you from?"
 SAY       "Is that OK? %[Yes](postback:yes) %[No](postback:no)"
 END
