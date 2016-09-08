@@ -15,9 +15,9 @@ class BslInterpreter {
     }
 
     getProperty(prop) {
-      this.getPropertyName = prop;
+      //this.getPropertyName = prop;
       this.bot.getProp(prop).then((val) => {
-        this.props[this.getPropertyName] = val;
+        this.props[prop] = val;
         this._continue({scenario: this.scenario, step: this.step }, Math.random().toString(36).substring(5), 'getprop' + this.debug);
       });
     }
@@ -131,6 +131,7 @@ class BslInterpreter {
         matches.forEach((val) => {
           var prop = val.substring(2, val.length-1);
           if (typeof this.props[prop] === 'undefined') {
+            console.log('Reikia loadinti:'+prop);
             this.getProperty(prop);
             return false;
           }
@@ -150,10 +151,13 @@ class BslInterpreter {
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
               var text = randMess.value;
-              if (this.loadVariables(text) !== true) {
+              var success = this.loadVariables(text)
+              console.log('success:'+success);
+              if (success !== true) {
                 return;
               }
               text = this.variablesReplace(text);
+              console.log(text);
               return this.say(text, true);
             }
             break;
