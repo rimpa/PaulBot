@@ -15,7 +15,6 @@ class BslInterpreter {
     }
 
     getProperty(prop) {
-      //this.getPropertyName = prop;
       this.bot.getProp(prop).then((val) => {
         this.props[prop] = val;
         this._continue({scenario: this.scenario, step: this.step }, Math.random().toString(36).substring(5), 'getprop' + this.debug);
@@ -127,17 +126,23 @@ class BslInterpreter {
 
     loadVariables(text) {
       var matches = text.match(/\$\{[a-z0-9_]+\}/gi);
+      var success = true;
       if (matches) {
-        matches.forEach((val) => {
-          var prop = val.substring(2, val.length-1);
-          if (typeof this.props[prop] === 'undefined') {
-            console.log('Reikia loadinti:'+prop);
-            this.getProperty(prop);
-            return false;
-          }
-        });
+        try {
+          matches.forEach((val) => {
+            var prop = val.substring(2, val.length-1);
+            if (typeof this.props[prop] === 'undefined') {
+              console.log('Reikia loadinti:'+prop);
+              this.getProperty(prop);
+              success = false;
+              throw BreakException;
+            }
+          });
+        } catch(e) {
+            if (e!==BreakException) throw e;
+        }
       }
-      return true;
+      return success;
     }
 
     execStetement(message, statement) {
