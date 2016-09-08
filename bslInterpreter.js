@@ -33,12 +33,15 @@ class BslInterpreter {
 
       if (typeof options.scenario !== 'undefined') {
         this.scenario = options.scenario;
+        this.props['scenario'] = options.scenario;
       }
       if (typeof options.step !== 'undefined') {
         this.step = options.step;
+        this.props['step'] = options.step;
       }
       if (typeof options.asked !== 'undefined') {
-        this.asked = options.step;
+        this.asked = options.asked;
+        this.props['asked'] = options.asked;
       }
 
       if (typeof this.scenario === 'undefined') {
@@ -177,6 +180,7 @@ class BslInterpreter {
               console.log('save var:'+collectedVariable+' val:'+collectedValue);
               this.props[collectedVariable] = collectedValue;
               this.asked = 'false';
+              this.props['asked'] = 'false';
 
               this.bot.setProp(collectedVariable, collectedValue);
               this.bot.setProp('asked', 'false');
