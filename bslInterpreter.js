@@ -130,7 +130,7 @@ class BslInterpreter {
             this.getProperty(prop);
             return false;
           }
-        }
+        });
       }
       return true;
     }
