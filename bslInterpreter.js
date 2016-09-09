@@ -92,7 +92,7 @@ class BslInterpreter {
     startInterpret(message) {
       this.message = message;
       console.log('interpretThis:'+message);
-      if (message == 'reset') {
+      if (message == 'reset12345') {
         return this._continue({scenario: 'main_scenario', step: 0});
       }
       return this._continue();
