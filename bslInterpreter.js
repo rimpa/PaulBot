@@ -16,6 +16,9 @@ class BslInterpreter {
 
     getProperty(prop) {
       this.bot.getProp(prop).then((val) => {
+        if (typeof val === 'undefined') {
+          val = '';
+        }
         this.props[prop] = val;
         if (prop == 'scenario') {
           if (!val) {
