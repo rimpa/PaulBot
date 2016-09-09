@@ -48,8 +48,9 @@ class BslInterpreter {
           return this.getProperty('scenario');
         }
         this.scenario = this.props['scenario'];
-        if (typeof this.scenario === 'undefined') {
+        if (!this.scenario) {
           this.scenario = 'main_scenario';
+          this.props['scenario'] = 'main_scenario';
           this.bot.setProp('scenario','main_scenario');
         }
       }
@@ -60,8 +61,9 @@ class BslInterpreter {
         }
 
         this.step = this.props['step'];
-        if (typeof this.step === 'undefined') {
+        if (!this.step) {
           this.step = 0;
+          this.props['step'] = 0;
           this.bot.setProp('step',0);
         }
       }
@@ -93,8 +95,8 @@ class BslInterpreter {
       this.message = message;
       console.log('interpretThis:'+message);
       if (message == 'reset12345') {
-        this.bot.setProp('scenario','main_scenario');
-        this.bot.setProp('step','0');
+        this.bot.setProp('scenario','');
+        this.bot.setProp('step', '');
         return;// this._continue({scenario: 'main_scenario', step: 0});
       }
       return this._continue();
