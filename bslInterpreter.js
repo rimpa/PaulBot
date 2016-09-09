@@ -40,6 +40,7 @@ class BslInterpreter {
       this.caller_debug = caller_debug;
       console.log('cont1'+this.scenario+' '+this.step+' '+debug+' '+caller_debug);
 
+
       if (typeof options === 'undefined') {
         options = [];
       }
