@@ -93,7 +93,9 @@ class BslInterpreter {
       this.message = message;
       console.log('interpretThis:'+message);
       if (message == 'reset12345') {
-        return this._continue({scenario: 'main_scenario', step: 0});
+        this.bot.setProp('scenario','main_scenario');
+        this.bot.setProp('step','0');
+        return;// this._continue({scenario: 'main_scenario', step: 0});
       }
       return this._continue();
     }
