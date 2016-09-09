@@ -97,6 +97,7 @@ class BslInterpreter {
       if (message == 'reset12345') {
         this.bot.setProp('scenario','');
         this.bot.setProp('step', '');
+        
         return;// this._continue({scenario: 'main_scenario', step: 0});
       }
       return this._continue();
