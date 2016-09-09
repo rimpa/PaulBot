@@ -17,6 +17,20 @@ class BslInterpreter {
     getProperty(prop) {
       this.bot.getProp(prop).then((val) => {
         this.props[prop] = val;
+        if (prop == 'scenario') {
+          if (!val) {
+            this.scenario = 'main_scenario';
+            this.props['scenario'] = 'main_scenario';
+            this.bot.setProp('scenario','main_scenario');
+          }
+        }
+        if (prop == 'step') {
+          if (typeof val === 'undefined') {
+            this.step = '0';
+            this.props['step'] = '0';
+            this.bot.setProp('step','0');
+          }
+        }
         this._continue({scenario: this.scenario, step: this.step }, Math.random().toString(36).substring(5), 'getprop' + this.debug);
       });
     }
@@ -48,24 +62,13 @@ class BslInterpreter {
           return this.getProperty('scenario');
         }
         this.scenario = this.props['scenario'];
-        if (!this.scenario) {
-          this.scenario = 'main_scenario';
-          this.props['scenario'] = 'main_scenario';
-          this.bot.setProp('scenario','main_scenario');
-        }
       }
 
       if (typeof this.step === 'undefined') {
         if (typeof this.props['step'] === 'undefined') {
           return this.getProperty('step');
         }
-
         this.step = this.props['step'];
-        if (!this.step) {
-          this.step = 0;
-          this.props['step'] = 0;
-          this.bot.setProp('step',0);
-        }
       }
 
       if (this.scenario == 'none') {
@@ -97,7 +100,7 @@ class BslInterpreter {
       if (message == 'reset12345') {
         this.bot.setProp('scenario','');
         this.bot.setProp('step', '');
-        
+
         return;// this._continue({scenario: 'main_scenario', step: 0});
       }
       return this._continue();
