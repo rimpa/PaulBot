@@ -101,13 +101,13 @@ class BslInterpreter {
     }
 
     increaseStep() {
-        this.step = this.step + 1;
+        this.step = parseInt(this.step) + 1;
         this.bot.setProp('step',this.step);
         return this.step;
     }
 
     setStep(step) {
-        this.step = step;
+        this.step = parseInt(step);
         this.bot.setProp('step',this.step);
     }
 
