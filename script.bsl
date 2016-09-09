@@ -2,7 +2,7 @@ DNUND     "Sorry, this is not defined in my script. type 'HELP' or 'h' for help.
 
 START     PERSONAL_BOT_OF_PAULIUS
 SAY       "HI, my name is P. I am a personal bot of Paulius Rimavičius, a passionate entrepreneur and bot developer."
-ASK       "What's your name?"
+ASK       "What is your name?"
 SAVE      name
 ASK       "Where are you from?"
 SAVE      from
