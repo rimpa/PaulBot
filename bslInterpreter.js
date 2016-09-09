@@ -25,7 +25,7 @@ class BslInterpreter {
           }
         }
         if (prop == 'step') {
-          if (typeof val === 'undefined') {
+          if (!val) {
             this.step = '0';
             this.props['step'] = '0';
             this.bot.setProp('step','0');
