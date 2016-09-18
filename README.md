@@ -39,37 +39,59 @@ By clicking on the pencil icon you can edit the document.
 
 ###Start tag
 Start the main scenario, this part of scenario is executed then the used ineracts with the bot for the first time. Example: 
-        START THE_NAME_OF_SCRIPT
+```
+START THE_NAME_OF_SCRIPT
+```
 ###Say tag
 Just a simple text message. Example:
-        SAY "The message bot should say"
+```
+SAY "The message bot should say"
+```
+
 ###ASK and SAVE tags
 Ask a question, the ASK should be followed by SAVE, to save the answer in a variable for the later use.
-        ASK "What is your name?"
-        SAVE name
+```
+ASK "What is your name?"
+SAVE name
+```
 ###END tag
 End main scenario, or other scenario
-        END
+```
+END
+```
 ###SCENARIO tag
 Start a new scenario. you can use unlimited number of strings to invoke a scenario. Syntax:
-        SCENARIO NAME_OF_SCENARIO "invoke_by_string_1" "invoke_by_string_2" "invoke_by_string_3"
+```
+SCENARIO NAME_OF_SCENARIO "invoke_by_string_1" "invoke_by_string_2" "invoke_by_string_3"
+```
 Example:
-        SCENARIO  HELP "help" "?" "h" "menu" "help me"
+```
+SCENARIO  HELP "help" "?" "h" "menu" "help me"
+```
 ###Saved variable
 To use a saved Variable (by SAVE tag) use this syntax:
-        SAY       "Great! ${name} from ${from}. What you want to do?"
+```
+SAY       "Great! ${name} from ${from}. What you want to do?"
+```
 ###Postback button
 To create a button use this syntax:
-        SAY       "Want learn more? %[Text on button](postback:follow_this_scenario_on_click)"
+```
+SAY       "Want learn more? %[Text on button](postback:follow_this_scenario_on_click)"
+```
 you have to have a scenario invocable by the postback string. Example:
-        SCENARIO  CREATOR "creator" "follow_this_scenario_on_click"
+```
+SCENARIO  CREATOR "creator" "follow_this_scenario_on_click"
+```
 ###Image
 To post an image, use this syntax:
-        SAY       "Here is a picture. ![pic1](http://url.com/to_image.jpg)"
+```
+SAY       "Here is a picture. ![pic1](http://url.com/to_image.jpg)"
+```
 ###Link
 To post a link, use this:
-        SAY       "My LinkedIn %[LinkedIn Profile](https://www.linkedin.com/in/rimavicius)"
-
+```
+SAY       "My LinkedIn %[LinkedIn Profile](https://www.linkedin.com/in/rimavicius)"
+```
 ##Bring it altogether
 Open script.bsl for a full example.
 
