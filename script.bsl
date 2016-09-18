@@ -51,7 +51,15 @@ SAY       "%[more](postback:i_am_here_for_the_bot2)"
 END
 
 SCENARIO  BOT2 "i_am_here_for_the_bot2"
-SAY       "Sorry, I am under heavy development, more info is coming!"
+SAY       "See my BSL script"
+SAY       "%[BSL on GitHub](https://github.com/rimpa/PaulBot/blob/master/script.bsl)"
+SAY       "Instructions how to create your own bot on BSL"
+SAY       "%[GitHub](https://github.com/rimpa/PaulBot/)"
+SAY       "%[more](postback:i_am_here_for_the_bot3)"
+END
+
+SCENARIO  BOT3 "i_am_here_for_the_bot3"
+SAY       "Enough about me, now it's time to learn more about Paulius!"
 SAY       "%[more about Paulius](postback:learn_more_about_paulius)"
 END
 
