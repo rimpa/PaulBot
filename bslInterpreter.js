@@ -5,7 +5,6 @@
 class BslInterpreter {
     constructor(options) {
         options = options || {};
-        //if (!options.store || !options.lock || !options.userId) {
         if (!options.bot || !options.programJson) {
             throw new Error('Invalid arguments. bot and programJson are required');
         }
@@ -41,8 +40,6 @@ class BslInterpreter {
     _continue(options, debug, caller_debug) {
       this.debug = debug;
       this.caller_debug = caller_debug;
-      console.log('cont1'+this.scenario+' '+this.step+' '+debug+' '+caller_debug);
-
 
       if (typeof options === 'undefined') {
         options = [];
@@ -91,21 +88,16 @@ class BslInterpreter {
           this.setStep(0);
           return;
       }
-      console.log(this.scenario+' '+this.step+' '+debug+' '+caller_debug);
-      if (typeof statementJson !== 'undefined') {
-        console.log('EXECUTE:'+statementJson.statement);
-      }
       return this.execStetement(this.message, statementJson);
     }
 
     startInterpret(message) {
       this.message = message;
-      console.log('interpretThis:'+message);
       if (message == 'reset12345') {
         this.bot.setProp('scenario','');
         this.bot.setProp('step', '');
 
-        return;// this._continue({scenario: 'main_scenario', step: 0});
+        return;
       }
       return this._continue();
     }
@@ -161,13 +153,11 @@ class BslInterpreter {
     }
 
     execStetement(message, statement) {
-      //console.log(statement);
       if (typeof statement === 'undefined') { return; }
       if (typeof statement.statement === 'undefined') { return; }
 
       switch (statement.statement) {
         case "SAY":
-            console.log('say');
             var randMess = this._getRandomArrayValue(statement.body);
             if (typeof randMess.value !== 'undefined') {
               var text = randMess.value;
@@ -176,12 +166,10 @@ class BslInterpreter {
                 return;
               }
               text = this.variablesReplace(text);
-              console.log(text);
               return this.say(text, true);
             }
             break;
         case "ASK":
-            console.log('ask_pradzia');
             if (typeof this.props['asked'] === 'undefined') {
               return this.getProperty('asked');
             }
@@ -196,7 +184,6 @@ class BslInterpreter {
               var collectedValue = message.trim();
 
               var collectedVariable = statement.body.save.body.value.value;
-              console.log('save var:'+collectedVariable+' val:'+collectedValue);
               this.props[collectedVariable] = collectedValue;
 
               this.asked = 'false';
@@ -206,7 +193,6 @@ class BslInterpreter {
 
               return this._continue({scenario: this.scenario, step: this.increaseStep(), asked:'false' } , Math.random().toString(36).substring(5), 'ask2:' + this.debug);
             } else {
-              console.log('ask_paklausiame');
               var randMess = this._getRandomArrayValue(statement.body.ask);
               if (typeof randMess.value !== 'undefined') {
 
@@ -287,8 +273,6 @@ class BslInterpreter {
     say(text, cont) {
       this.bot.say(text).then(() => {
         if (cont === true) {
-          console.log('say continue');
-          //return;
           this._continue({scenario: this.scenario, step: this.increaseStep() } , Math.random().toString(36).substring(5), 'say:' + this.debug);
         }
       });
