@@ -1,36 +1,20 @@
-# SmoochBot Examples
+# PaulBot built using the Smooch Bot example
 
-A set of example chat bots built on [smooch/smooch-bot](https://github.com/smooch/smooch-bot).
+The purpose of this bot implementation is to show BSL Bot Scenario Language in action. Go test the bot in action on Messanger:
+http://m.me/1776083119303814
 
-Before you get started with any of these samples, from this directory you should:
+The original Smooch Bot code is here: https://github.com/smooch/smooch-bot-example
 
-```
-$ npm install
-```
+BSL is inspired by EstherBot:
+https://github.com/esthercrawford/EstherBot
 
-All of these samples use the same scipt defined in `script.js`. Feel free to play around with it as you go.
+# Build Your Bot
 
-## Console Example (/console)
-
-This is the simplest sample that runs via the command line and uses an in-memory store to track state.
-
-![console](/img/console.gif)
-
-To run it, simply:
-
-```
-$ node console
-```
-
-And start chatting with your bot on the command line.
-
-## Heroku Example (/heroku)
-
-This is an Express app that uses the Smooch web widget to provide the chat interface. The app makes use of `SmoochApiStore` and `SmoochApiBot` to persist conversation state and user properties via Smooch.
+Creating this version will give you a web based chat app. With a few integrations inside of Smooch (like Twilio) you can have your bot talking on other platforms too including SMS, Facebook, and Telegram.  
 
 ![heroku](/img/heroku.gif)
 
-To deploy your own:
+## Get Started:
 
 1. First, sign up for a free account at [smooch.io](https://app.smooch.io/signup)
 
@@ -38,17 +22,59 @@ To deploy your own:
 
     ![settings](/img/settings.png)
 
-1. Deploy your app to Heroku using the button below. You'll need to specify your app token, key ID, and secret in the app's `SMOOCH_APP_TOKEN`, `SMOOCH_KEY_ID`, and `SMOOCH_SECRET` config settings.
+1. Deploy your app to Heroku using the button below. It's a service for hosting apps so go sign up if you don't already have an account – it's free. You'll need to specify your app token, key ID, and secret in the app's `SMOOCH_APP_TOKEN`, `SMOOCH_KEY_ID`, and `SMOOCH_SECRET` config settings.
 
     [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/rimpa/PaulBot)
 
-1. Your app should now be running on Heroku but you're not quite done yet. Take note of the URL where your heroku app is running, for example `https://foo-bar-4242.herokuapp.com`. You'll need to specify this in your heroku app `SERVICE_URL` config variable. You can do this in the Heroku control panel under *Settings* > *Config Variables*, or if you have the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed you can do it like so:
-
-        $ heroku config:set SERVICE_URL=https://foo-bar-4242.herokuapp.com -a foo-bar-4242
+1. Your app should now be running on Heroku but you're not quite done yet. Take note of the URL where your heroku app is running, for example `https://foo-bar-4242.herokuapp.com`. You'll need to specify this in your heroku app `SERVICE_URL` config variable. You can do this in the Heroku control panel under *Settings* > *Config Variables*. Make sure to go under Deploy and connect to your GitHub repo. Then, enable Automatic Deploys from the master branch (this means anytime you make an edit to your bot's script, it'll automatically update and talk as intended in seconds.) 
 
 1. You should be all set. Open your Heroku app and start chatting with your new bot!
 
-1. **Bonus:** Open the Smooch [control panel](https://app.smooch.io) and add more integrations. You can add new user channels like Twilio SMS, or you can add Slack or HipChat which will let you join in on the conversation along side your bot. Pretty neat!
+##Teach Your Bot To Talk
+Now that you have a bot you need to decide what it'll say. That's where the file script.bsl comes in. It's the document you need to edit to make your bot talk.
+
+By clicking on the pencil icon you can edit the document. 
+
+## Here is a short intro to BSL syntax:
+
+###Start tag
+Start the main scenario, this part of scenario is executed then the used ineracts with the bot for the first time. Example: 
+        START THE_NAME_OF_SCRIPT
+###Say tag
+Just a simple text message. Example:
+        SAY "The message bot should say"
+###ASK and SAVE tags
+Ask a question, the ASK should be followed by SAVE, to save the answer in a variable for the later use.
+        ASK "What is your name?"
+        SAVE name
+###END tag
+End main scenario, or other scenario
+        END
+###SCENARIO tag
+Start a new scenario. you can use unlimited number of strings to invoke a scenario. Syntax:
+        SCENARIO NAME_OF_SCENARIO "invoke_by_string_1" "invoke_by_string_2" "invoke_by_string_3"
+Example:
+        SCENARIO  HELP "help" "?" "h" "menu" "help me"
+###Saved variable
+To use a saved Variable (by SAVE tag) use this syntax:
+        SAY       "Great! ${name} from ${from}. What you want to do?"
+###Postback button
+To create a button use this syntax:
+        SAY       "Want learn more? %[Text on button](postback:follow_this_scenario_on_click)"
+you have to have a scenario invocable by the postback string. Example:
+        SCENARIO  CREATOR "creator" "follow_this_scenario_on_click"
+###Image
+To post an image, use this syntax:
+        SAY       "Here is a picture. ![pic1](http://url.com/to_image.jpg)"
+###Link
+To post a link, use this:
+        SAY       "My LinkedIn %[LinkedIn Profile](https://www.linkedin.com/in/rimavicius)"
+
+##Bring it altogether
+Open script.bsl for a full example.
+
+##Bonus
+Open the Smooch [control panel](https://app.smooch.io) and add more integrations. You can add new user channels like Twilio SMS, or you can add Slack or HipChat which will let you join in on the conversation along side your bot. Pretty neat!
 
 ![slack](/img/slack.png)
 
@@ -57,7 +83,6 @@ To deploy your own:
 Is your bot misbehaving? Not working? Here are some steps you can follow to figure out what's going wrong.
 
 **Warning:** command line instructions incoming. You may not be accustomed to using the command line but don't worry, it's much easier than you think.
-
 
 ## Check your bot's logs on heroku
 
